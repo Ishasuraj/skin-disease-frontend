@@ -1,0 +1,316 @@
+{
+  "language": "言語",
+  "user": "ユーザー",
+  "adminBadge": "管理者",
+  "logout": "ログアウト",
+  "welcomeBack": "__ PH 0 __、おかえりなさい。",
+  "nav": {
+    "scan": "スキャンと予測",
+    "disease": "疾患情報",
+    "precautions": "注意事項",
+    "profile": "マイプロフィール",
+    "admin": "管理画面"
+  },
+  "adminPanel": {
+    "title": "管理画面",
+    "description": "完全な管理ダッシュボードにアクセスして、ユーザーを管理し、分析と予測を表示します。",
+    "open": "ダッシュボード"
+  },
+  "severity": {
+    "low": "低",
+    "medium": "中",
+    "high": "高い",
+    "risk": "__ PH 0 __リスク",
+    "benign": "概して良性",
+    "monitor": "注意深く監視する",
+    "urgent": "医師の診察を受ける"
+  },
+  "scan": {
+    "title": "画像解析",
+    "subtitle": "画像をアップロードするか、ライブウェブカメラを使用して即座にAIスキン分析を行います。",
+    "upload": "アップロード",
+    "webcam": "Webカメラ",
+    "dropHere": "ここに置いて！",
+    "dragDrop": "画像をドラッグ&ドロップする",
+    "browse": "もしくはファイルをクリックして閲覧します",
+    "chooseImage": "画像を選択",
+    "fileTypes": "JPG、PNG、WEBPをサポート—最大10 MB",
+    "ready": "分析準備完了",
+    "chooseDifferent": "ほかのカードを選択",
+    "analyzing": "分析しています...",
+    "analyze": "画像を分析",
+    "cameraDenied": "カメラへのアクセスが拒否されました",
+    "cameraHint": "ブラウザの設定でカメラへのアクセスを許可してから、もう一度お試しください。",
+    "tryAgain": "再試行してください。",
+    "startingCamera": "カメラを起動しています...",
+    "live": "ライブ",
+    "flip": "反転",
+    "tip": "スキンエリアを青いフレームの内側に配置します。正確さを高めるために、良好な照明を確保してください。",
+    "capture": "イメージをキャプチャ",
+    "captured": "奪取",
+    "retake": "やり直し",
+    "loadingTitle": "スキンパターンを分析しています...",
+    "loadingSubtitle": "CNNモデルが画像を処理しています。しばらくお待ちください。",
+    "loadingModel": "ディープラーニングモデルを実行しています..."
+  },
+  "prediction": {
+    "title": "AI予測結果",
+    "condition": "検出された状態",
+    "confidence": "NLPの信頼度スコア",
+    "severity": "深刻度レベル",
+    "probabilities": "予測確率",
+    "gradcamTitle": "Grad - CAMの可視化",
+    "original": "元の画像",
+    "heatmap": "AIフォーカスヒートマップ",
+    "heatmapPending": "Flaskバックエンドが接続されると、ヒートマップがここに表示されます",
+    "disclaimer": "これは意識のためのAI予測です。適切な診断については、認定皮膚科医にご相談ください。",
+    "others": "その他"
+  },
+  "diseaseInfo": {
+    "title": "疾病への意識",
+    "subtitle": "DermaLensによって検出された7つの肌の状態について学びます。カードをクリックすると詳細が表示されます。",
+    "more": "増加",
+    "less": "減少",
+    "medicalRef": "医療リファレンス",
+    "lookFor": "検閲する脅威：",
+    "symptoms": "症状",
+    "causes": "原 因",
+    "highWarning": "高リスク—これらの症状に気づいたらすぐに皮膚科医に相談してください。",
+    "mediumWarning": "中程度のリスク—症状が悪化した場合は、定期的にモニターし、医師の診察を受けてください。",
+    "disclaimer": "示される画像は、医学的参照図である。適切な診断については、必ず認定された皮膚科医に相談してください。"
+  },
+  "diseases": {
+    "melanocyticNevi": {
+      "name": "メラノサイト性母斑",
+      "description": "通常無害な一般的なほくろ。これらは、皮膚に現れる色素細胞のクラスターです。",
+      "visualLabel": "丸みを帯びたダークブラウンの斑点",
+      "visualDesc": "典型的には、小さな、均一に着色されたダークスポットとして表示されます",
+      "symptoms": [
+        "茶色または黒い斑点",
+        "丸い形または楕円形",
+        "エッジを滑らかにする",
+        "æèé¢ã«ç§»å(B)"
+      ],
+      "causes": [
+        "遺伝的危険因子",
+        "日光への露出",
+        "ホルモンの変化です"
+      ],
+      "lookFor": [
+        "対称形状",
+        "均一な茶色",
+        "枠線をクリア",
+        "サイズ< 6 mm"
+      ]
+    },
+    "melanoma": {
+      "name": "悪性黒色腫",
+      "description": "メラノサイトで発症する最も重篤なタイプの皮膚癌。早期発見が重要です。",
+      "visualLabel": "不規則、多色性病変",
+      "visualDesc": "複数の色合いの不均一な形状—赤、黒、茶色の混合",
+      "symptoms": [
+        "非対称モル",
+        "不規則な境界線",
+        "複数の色",
+        "直径> 6 mm"
+      ],
+      "causes": [
+        "化学線",
+        "家族歴",
+        "弱体化した免疫システム"
+      ],
+      "lookFor": [
+        "非対称形状",
+        "ぼろぼろの枠線",
+        "カラーバリエーション",
+        "規模の拡大"
+      ]
+    },
+    "basalCell": {
+      "name": "基底細胞がん",
+      "description": "最も一般的な皮膚がん。広がることはめったにありませんが、治療が必要です。真珠の隆起のように見えることがよくあります。",
+      "visualLabel": "真珠色、ピンクがかった隆起",
+      "visualDesc": "真珠色またはワックス色の外観の光沢のある半透明のバンプ",
+      "symptoms": [
+        "真珠のような隆起",
+        "平坦な瘢痕様病変",
+        "ｼｭｯｹﾂｾｲﾂｳ",
+        "ピンクの成長"
+      ],
+      "causes": [
+        "慢性的な日光曝露",
+        "放射線治療",
+        "白い肌"
+      ],
+      "lookFor": [
+        "真珠のような表面",
+        "ピンクまたはスキントーン",
+        "目に見える血管がある可能性があります",
+        "成長が遅い"
+      ]
+    },
+    "benignKeratosis": {
+      "name": "ﾘｮｳｾｲｶｸﾏｸｼｮｳ",
+      "description": "非癌性の皮膚の成長は、一般的に年齢とともに現れ、ワックス状または固着しているように見えます。",
+      "visualLabel": "ワキシー、隆起したワッペン",
+      "visualDesc": "粗い、ろう状の、またはうろこ状の表面—肌にくっついているように見えます",
+      "symptoms": [
+        "ワックス状の表面",
+        "スタックオンの外観",
+        "可変色",
+        "痒み&#10;"
+      ],
+      "causes": [
+        "Aging",
+        "日光への露出",
+        "遺伝学"
+      ],
+      "lookFor": [
+        "ワックステクスチャ",
+        "タンからダークブラウン",
+        "明確に定義されたエッジ",
+        "スタックオンルック"
+      ]
+    },
+    "dermatofibroma": {
+      "name": "皮膚線維腫",
+      "description": "良性の皮膚の成長は、通常、小さなしっかりとした隆起として脚に現れます。",
+      "visualLabel": "小さくてしっかりした丸いバンプ",
+      "visualDesc": "小さな隆起したバンプ—両側から挟まれたときに内側にディンプル",
+      "symptoms": [
+        "小さいしっかりとしたバンプ",
+        "茶色または赤色",
+        "つまむとディンプルになります",
+        "わずかに隆起している"
+      ],
+      "causes": [
+        "軽度の皮膚損傷",
+        "昆虫咬傷ＮＯＳ",
+        "原因不明"
+      ],
+      "lookFor": [
+        "ハリのある食感",
+        "レッドブラウン",
+        "ディンプルサイン",
+        "通常は脚に"
+      ]
+    },
+    "vascularLesion": {
+      "name": "ｹｯｶﾝﾋﾞｮｳﾍﾝ",
+      "description": "皮膚表面を通して見える血管の異常。",
+      "visualLabel": "赤、血管パッチ",
+      "visualDesc": "明るい赤色または紫色—皮膚表面近くの血管によって引き起こされる",
+      "symptoms": [
+        "赤い斑点または紫色の斑点",
+        "フラットまたは隆起している",
+        "出血の可能性あり",
+        "スパイダーのようなパターン"
+      ],
+      "causes": [
+        "遺伝学",
+        "日焼けダメージ",
+        "Aging"
+      ],
+      "lookFor": [
+        "明るい赤の色",
+        "くも状バースト",
+        "圧力でブランチ",
+        "不規則な形状"
+      ]
+    },
+    "actinicKeratosis": {
+      "name": "光線性角化症",
+      "description": "長年の日光曝露によって引き起こされる荒れた鱗状の斑点。前がん性と考えられています。",
+      "visualLabel": "荒れた、鱗状の赤いワッペン",
+      "visualDesc": "乾燥した、ざらざらした、鱗状の皮膚のパッチ—典型的には赤、ピンク、または茶色",
+      "symptoms": [
+        "ラフスケリーワッペン",
+        "平面から隆起まで",
+        "かゆみや灼熱感",
+        "硬いいぼのような表面"
+      ],
+      "causes": [
+        "紫外線露光。",
+        "日焼けベッド",
+        "弱体化した耐性"
+      ],
+      "lookFor": [
+        "鱗状の質感",
+        "ピンクから赤へのカラー",
+        "触ると荒い",
+        "平坦またはわずかに隆起している"
+      ]
+    }
+  },
+  "precautions": {
+    "title": "予防措置とスキンケア",
+    "subtitle": "健康な肌を維持し、皮膚疾患を予防するために、これらのガイドラインに従ってください。",
+    "warningTitle": "重要な警告",
+    "warningBody": "急激に変化する皮膚病変に気づいた場合は、直ちに認定皮膚科医に相談してください。早期発見は命を救います。",
+    "sun": {
+      "title": "日焼け止め",
+      "tips": [
+        "毎日SPF 30以上の日焼け止めを塗ります",
+        "屋外で2時間ごとに再塗布する",
+        "防護服と帽子を着用する",
+        "ピーク日時（午前10時～午後4時）を避ける"
+      ]
+    },
+    "checks": {
+      "title": "定期的なスキンチェック",
+      "tips": [
+        "毎月肌をチェックする",
+        "Look for new or changing moles",
+        "Use the ABCDE rule for moles",
+        "See a dermatologist annually"
+      ]
+    },
+    "hydration": {
+      "title": "Skin Hydration",
+      "tips": [
+        "Moisturize daily after bathing",
+        "Drink at least 8 glasses of water",
+        "Avoid hot showers — use warm water",
+        "Use fragrance-free products"
+      ]
+    },
+    "diet": {
+      "title": "Healthy Diet",
+      "tips": [
+        "Eat antioxidant-rich foods",
+        "Include omega-3 fatty acids",
+        "Reduce processed sugar intake",
+        "Eat leafy greens and berries"
+      ]
+    },
+    "habits": {
+      "title": "Avoid Harmful Habits",
+      "tips": [
+        "Avoid smoking — damages skin",
+        "Limit alcohol consumption",
+        "Do not use tanning beds",
+        "Avoid picking or scratching skin"
+      ]
+    },
+    "doctor": {
+      "title": "When to See a Doctor",
+      "tips": [
+        "Mole changes in size or color",
+        "Sore that won't heal",
+        "Itching or bleeding lesions",
+        "Any skin change that worries you"
+      ]
+    }
+  },
+  "profile": {
+    "title": "マイプロフィール",
+    "displayName": "Display Name",
+    "email": "Email Address",
+    "saving": "Saving...",
+    "save": "Save Changes",
+    "updateSuccess": "Profile updated successfully!",
+    "updateError": "Failed to update profile.",
+    "historyTitle": "Prediction History",
+    "historyNote": "Full history will be available once backend is connected"
+  }
+}

@@ -1,0 +1,316 @@
+{
+  "language": "Lenguaje",
+  "user": "Usuario",
+  "adminBadge": "Administrador",
+  "logout": "Cerrar sesión",
+  "welcomeBack": "Te damos la bienvenida de nuevo, {{name}}",
+  "nav": {
+    "scan": "Escanear y predecir",
+    "disease": "Información de la enfermedad",
+    "precautions": "Precauciones",
+    "profile": "Mi perfil",
+    "admin": "Panel de admin"
+  },
+  "adminPanel": {
+    "title": "Panel de admin",
+    "description": "Accede al panel de administración completo para gestionar usuarios, ver análisis y predicciones.",
+    "open": "El panel de control de administrador"
+  },
+  "severity": {
+    "low": "Baja",
+    "medium": "Medio",
+    "high": "Alto",
+    "risk": "{{level}} Riesgo",
+    "benign": "Son generalmente benignos.",
+    "monitor": "Monitoree de cerca. ",
+    "urgent": "ACUDA AL MÉDICO PRONTO"
+  },
+  "scan": {
+    "title": "Análisis de Imágenes",
+    "subtitle": "Suba una imagen o use su cámara web en vivo para realizar un análisis instantáneo de la piel de la IA.",
+    "upload": "Cargar",
+    "webcam": "Cámara web",
+    "dropHere": "Déjalo aquí",
+    "dragDrop": "Arrastra y suelta tu imagen",
+    "browse": "o hacer clic para buscar archivos",
+    "chooseImage": "Elegir imagen",
+    "fileTypes": "Compatible con JPG, PNG, WEBP — máx. 10 MB",
+    "ready": "listo para analizar",
+    "chooseDifferent": "Elija otra tarjeta",
+    "analyzing": "Analizando.",
+    "analyze": "Analyze Image",
+    "cameraDenied": "Acceso a la cámara denegado",
+    "cameraHint": "Permite el acceso a la cámara en la configuración de tu navegador e inténtalo de nuevo.",
+    "tryAgain": "Intentar de nuevo",
+    "startingCamera": "Encendiendo la cámara. ",
+    "live": "Directo",
+    "flip": "Voltear",
+    "tip": "Coloque el área de la piel dentro del marco azul. Garantice una buena iluminación para una mejor precisión.",
+    "capture": "Capturar imagen",
+    "captured": "Capturado",
+    "retake": "Repetir",
+    "loadingTitle": "Analizando el patrón de la piel...",
+    "loadingSubtitle": "El modelo de CNN está procesando tu imagen. Espera.",
+    "loadingModel": "Ejecutando un modelo de aprendizaje profundo..."
+  },
+  "prediction": {
+    "title": "Resultado de la predicción de IA",
+    "condition": "CONDICIÓN DETECTADA",
+    "confidence": "puntuación de confianza",
+    "severity": "SEVERITY LEVEL",
+    "probabilities": "Probabilidades de predicción",
+    "gradcamTitle": "Visualización Grad-CAM",
+    "original": "Imagen original",
+    "heatmap": "MAPA DE CALOR DE ENFOQUE DE IA",
+    "heatmapPending": "El mapa de calor aparecerá aquí una vez que el backend del frasco esté conectado",
+    "disclaimer": "Esta es una predicción de IA solo para el conocimiento. Consulte a un dermatólogo certificado para un diagnóstico adecuado.",
+    "others": "Otros"
+  },
+  "diseaseInfo": {
+    "title": "Disease Awareness",
+    "subtitle": "Conoce las 7 afecciones cutáneas detectadas por DermaLens. Haz clic en cualquier tarjeta para ver todos los detalles.",
+    "more": "Más",
+    "less": "Menos",
+    "medicalRef": "Referencia Médica",
+    "lookFor": "Qué es lo que hay que notar",
+    "symptoms": "Síntomas",
+    "causes": "Causas",
+    "highWarning": "Riesgo alto: consulte a un dermatólogo de inmediato si nota estos síntomas.",
+    "mediumWarning": "Riesgo medio: vigile con regularidad y consulte a un médico si los síntomas empeoran.",
+    "disclaimer": "Las imágenes que se muestran son ilustraciones de referencia médica. Siempre consulte a un dermatólogo certificado para un diagnóstico adecuado."
+  },
+  "diseases": {
+    "melanocyticNevi": {
+      "name": "Nevo Pigmentado",
+      "description": "Lunares comunes que suelen ser inofensivos. Son grupos de células pigmentadas que aparecen en la piel.",
+      "visualLabel": "Mancha redonda de color marrón oscuro",
+      "visualDesc": "Por lo general, aparece como una mancha oscura pequeña y pigmentada uniformemente",
+      "symptoms": [
+        "Puntos marrones o negros",
+        "Forma redonda u ovalada",
+        "HAGA BORDES LISOS",
+        "Color uniforme"
+      ],
+      "causes": [
+        "Factores genéticos",
+        "Exposición al sol",
+        "Cambios hormonales"
+      ],
+      "lookFor": [
+        "Symmetrical Shape",
+        "color marrón",
+        "Borrar borde",
+        "Tamaño: 6 mm."
+      ]
+    },
+    "melanoma": {
+      "name": "Melanoma",
+      "description": "El tipo más grave de cáncer de piel, que se desarrolla en los melanocitos. La detección temprana es fundamental.",
+      "visualLabel": "Lesión irregular, multicolor",
+      "visualDesc": "Forma desigual con múltiples tonos: rojo, negro, marrón mezclado",
+      "symptoms": [
+        "Lunares asimétricos",
+        "Fronteras irregulares",
+        "Colores múltiples",
+        "Diámetro: 6 mm."
+      ],
+      "causes": [
+        "Radiación ultravioleta",
+        "Historial familiar",
+        "Sistema inmune debilitado"
+      ],
+      "lookFor": [
+        "Forma asimétrica",
+        "Borde irregular",
+        "Colores Disponibles",
+        "Mayor tamaño"
+      ]
+    },
+    "basalCell": {
+      "name": "Carcinoma basocelular",
+      "description": "Cáncer de piel más frecuente. Rara vez se propaga, pero necesita tratamiento. A menudo parece una protuberancia nacarada.",
+      "visualLabel": "Protuberancia perlada y rosada",
+      "visualDesc": "Protuberancia brillante y translúcida con aspecto nacarado o ceroso",
+      "symptoms": [
+        "Protuberancia perlada",
+        "Lesión similar a una cicatriz plana",
+        "Úlcera sangrante",
+        "Crecimiento rosa"
+      ],
+      "causes": [
+        "Exposición crónica al sol",
+        "Radioterápica",
+        "Piel clara"
+      ],
+      "lookFor": [
+        "Superficie perlada",
+        "Rosa o tono piel",
+        "Puede tener vasos visibles",
+        "Crecimiento lento."
+      ]
+    },
+    "benignKeratosis": {
+      "name": "Queratosis benigna",
+      "description": "Crecimientos cutáneos no cancerosos que suelen aparecer con la edad, con aspecto ceroso o adherido.",
+      "visualLabel": "Parche céreo y elevado",
+      "visualDesc": "Superficie rugosa, cerosa o escamosa: se ve pegada a la piel",
+      "symptoms": [
+        "Superficie cerosa",
+        "Apariencia pegada",
+        "Color variable",
+        "Comezón"
+      ],
+      "causes": [
+        "Envejecimiento",
+        "Exposición al sol",
+        "Genética"
+      ],
+      "lookFor": [
+        "Textura cerosa",
+        "De tostado a marrón oscuro",
+        "Bien definido",
+        "Aspecto pegado"
+      ]
+    },
+    "dermatofibroma": {
+      "name": "Dermatofibroma",
+      "description": "Crecimientos benignos de la piel que aparecen comúnmente en las piernas como pequeñas protuberancias firmes.",
+      "visualLabel": "Pequeña y firme protuberancia redonda",
+      "visualDesc": "Pequeña protuberancia elevada: hoyuelos hacia adentro cuando se pellizcan desde ambos lados",
+      "symptoms": [
+        "Pequeña protuberancia firme",
+        "Color marrón o rojo",
+        "Hoyuelos al pellizcar",
+        "Ligeramente elevado"
+      ],
+      "causes": [
+        "Lesiones cutáneas leves",
+        "Picaduras de insectos",
+        "Causas desconocidas"
+      ],
+      "lookFor": [
+        "Textura firme",
+        "Marrón rojizo",
+        "Signo de hoyuelo",
+        "Por lo general, en las piernas"
+      ]
+    },
+    "vascularLesion": {
+      "name": "Lesión vascular",
+      "description": "Anomalías de los vasos sanguíneos visibles a través de la superficie de la piel.",
+      "visualLabel": "Parche vascular rojo",
+      "visualDesc": "Rojo o púrpura brillante: causado por vasos sanguíneos cerca de la superficie de la piel",
+      "symptoms": [
+        "Manchas rojas o moradas",
+        "Plana o elevada",
+        "Puede sangrar",
+        "Patrón similar a una araña"
+      ],
+      "causes": [
+        "Genética",
+        "Daño solar",
+        "Envejecimiento"
+      ],
+      "lookFor": [
+        "color rojo brillante",
+        "Telangiectasia",
+        "Blanqueos a presión",
+        "Forma irregular"
+      ]
+    },
+    "actinicKeratosis": {
+      "name": "Queratosis Actínica",
+      "description": "Parche áspero y escamoso causado por años de exposición al sol. Considerado precanceroso.",
+      "visualLabel": "Parche rojo áspero y escamoso",
+      "visualDesc": "Parche de piel seco, áspero y escamoso, generalmente de color rojo, rosa o marrón",
+      "symptoms": [
+        "Parche escamoso áspero",
+        "De plano a elevado",
+        "Picazón o ardor.",
+        "Superficie dura similar a una verruga"
+      ],
+      "causes": [
+        "Exposición a los rayos UV",
+        "Cabinas de bronceado",
+        "Inmunidad debilitada"
+      ],
+      "lookFor": [
+        "Textura escamosa",
+        "Color rosa a rojo",
+        "Áspero cuando se toca",
+        "Plana o ligeramente elevada"
+      ]
+    }
+  },
+  "precautions": {
+    "title": "Precauciones y cuidado de la piel",
+    "subtitle": "Siga estas pautas para mantener la piel sana y prevenir enfermedades de la piel.",
+    "warningTitle": "Advertencia Importante",
+    "warningBody": "Si observa cualquier lesión cutánea que cambie rápidamente, consulte inmediatamente a un dermatólogo certificado. La detección temprana salva vidas.",
+    "sun": {
+      "title": "Protección Solar",
+      "tips": [
+        "Aplique protector solar SPF 30+ todos los días",
+        "Volver a aplicar cada 2 horas al aire libre",
+        "Use ropa protectora y sombreros",
+        "Evite las horas pico de sol (10:00 a. m. a 4:00 p. m."
+      ]
+    },
+    "checks": {
+      "title": "Chequeos regulares de la piel",
+      "tips": [
+        "Revise su piel mensualmente",
+        "Look for new or changing moles",
+        "Utilice la regla ABCDE para los lunares",
+        "Ver a un dermatólogo anualmente"
+      ]
+    },
+    "hydration": {
+      "title": "hidratación de la piel",
+      "tips": [
+        "Hidratar diariamente después del baño",
+        "Beba por lo menos 8 vasos de agua al día.",
+        "Evite las duchas calientes: use agua tibia",
+        "Usar productos sin fragancias"
+      ]
+    },
+    "diet": {
+      "title": "Dieta saludable",
+      "tips": [
+        "<subtitle> Alimentos ricos en antioxidantes",
+        "Ácidos grasos Omega-3",
+        "Reducir la ingesta de azúcar procesada",
+        "Come verduras de hoja verde y bayas"
+      ]
+    },
+    "habits": {
+      "title": "Evita los hábitos nocivos",
+      "tips": [
+        "Evitar fumar: daña la piel",
+        "Limite el consumo de alcohol",
+        "No utilice camas de bronceado. ",
+        "Evite rascarse o rascarse la piel"
+      ]
+    },
+    "doctor": {
+      "title": "Cuándo consultar a un médico",
+      "tips": [
+        "Cambios de topo en tamaño o color",
+        "Una herida que no sana.",
+        "Picazón o lesiones sangrantes",
+        "Cualquier cambio de piel que te preocupe"
+      ]
+    }
+  },
+  "profile": {
+    "title": "Mi perfil",
+    "displayName": "Nombre mostrado",
+    "email": "Dirección de correo electrónico",
+    "saving": "Guardando...",
+    "save": "Guardar cambios",
+    "updateSuccess": "Perfil actualizado con éxito",
+    "updateError": "No se logró actualizar el perfil.",
+    "historyTitle": "Historial de predicciones",
+    "historyNote": "El historial completo estará disponible una vez que se conecte el backend"
+  }
+}
