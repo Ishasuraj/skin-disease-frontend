@@ -7,7 +7,7 @@ const severityColor = {
   High: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800',
 };
 
-const PredictionResult = ({ data, image }) => {
+const PredictionResult = ({ data, image, isConsensus = false }) => {
   const { t } = useTranslation();
 
   const translateDisease = (name) => {
@@ -29,6 +29,7 @@ const PredictionResult = ({ data, image }) => {
   return (
     <div className="space-y-4">
 
+      {/* Prediction Summary */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
         <div className="flex items-center gap-2 mb-6">
           <span className="text-2xl">🎯</span>
@@ -45,10 +46,7 @@ const PredictionResult = ({ data, image }) => {
             <div className="text-xs text-purple-600 dark:text-purple-400 font-semibold mb-1">{t('dashboard.prediction.confidence')}</div>
             <div className="text-lg font-bold text-slate-800 dark:text-white">{data.confidence}%</div>
             <div className="w-full bg-purple-100 dark:bg-purple-900/40 rounded-full h-1.5 mt-2">
-              <div
-                className="bg-purple-500 h-1.5 rounded-full transition-all"
-                style={{ width: `${data.confidence}%` }}
-              />
+              <div className="bg-purple-500 h-1.5 rounded-full transition-all" style={{ width: `${data.confidence}%` }} />
             </div>
           </div>
 
@@ -64,6 +62,7 @@ const PredictionResult = ({ data, image }) => {
           </div>
         </div>
 
+        {/* Probabilities */}
         <div>
           <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3">
             📊 {t('dashboard.prediction.probabilities')}
@@ -77,9 +76,7 @@ const PredictionResult = ({ data, image }) => {
                 </div>
                 <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2">
                   <div
-                    className={`h-2 rounded-full transition-all ${
-                      index === 0 ? 'bg-blue-500' : 'bg-slate-300 dark:bg-slate-500'
-                    }`}
+                    className={`h-2 rounded-full transition-all ${index === 0 ? 'bg-blue-500' : 'bg-slate-300 dark:bg-slate-500'}`}
                     style={{ width: `${item.score}%` }}
                   />
                 </div>
@@ -89,32 +86,7 @@ const PredictionResult = ({ data, image }) => {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-2xl">🗺️</span>
-          <h2 className="text-lg font-bold text-slate-800 dark:text-white">{t('dashboard.prediction.gradcamTitle')}</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">{t('dashboard.prediction.original')}</p>
-            <div className="rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-700">
-              <img src={image} alt="Original" className="w-full object-contain max-h-48" />
-            </div>
-          </div>
-          <div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">{t('dashboard.prediction.heatmap')}</p>
-            <div className="rounded-xl bg-slate-100 dark:bg-slate-700 max-h-48 flex items-center justify-center">
-              <div className="text-center p-6">
-                <div className="text-4xl mb-2">🔗</div>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  {t('dashboard.prediction.heatmapPending')}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      {/* Disclaimer */}
       <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-2xl p-4 flex gap-3">
         <span className="text-xl">⚠️</span>
         <p className="text-amber-700 dark:text-amber-400 text-sm">

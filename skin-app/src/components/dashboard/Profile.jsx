@@ -33,7 +33,9 @@ const Profile = () => {
             disease: data.disease,
             confidence: data.confidence + '%',
             severity: data.severity,
-            isConsensus: data.isConsensus || false
+            isConsensus: data.isConsensus || false,
+            gradcam_url: data.gradcam_url || null, // ← add this
+            probabilities: data.probabilities || [] 
           };
         });
         setHistory(list);
