@@ -3,18 +3,6 @@ import { useTranslation } from 'react-i18next';
 import Webcam from 'react-webcam';
 import PredictionResult from './PredictionResult';
 
-const mockPrediction = {
-  disease: 'Melanocytic Nevi',
-  confidence: 87.4,
-  severity: 'Low',
-  probabilities: [
-    { name: 'Melanocytic Nevi', score: 87.4 },
-    { name: 'Melanoma', score: 6.2 },
-    { name: 'Benign Keratosis', score: 3.8 },
-    { name: 'Basal Cell Carcinoma', score: 1.6 },
-    { name: 'Others', score: 1.0 },
-  ]
-};
 
 const ImageUpload = ({ onPrediction, predictionData }) => {
   const { t } = useTranslation();
@@ -57,18 +45,21 @@ const ImageUpload = ({ onPrediction, predictionData }) => {
     onPrediction(null);
   }, [webcamRef, onPrediction]);
 
-  const handleAnalyze = async () => {
+ const handleAnalyze = async () => {
     if (!image) return;
     setLoading(true);
-    // ---- MOCK API CALL ----
-    // Replace with real API when Flask is ready:
-    // const formData = new FormData();
-    // formData.append('image', image);
-    // const response = await axios.post('http://localhost:5000/predict', formData);
-    // onPrediction(response.data);
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    onPrediction(mockPrediction);
-    // ---- END MOCK ----
+    try {
+      const formData = new FormData();
+      formData.append('image', image);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/predict`, {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      onPrediction(data);
+    } catch (error) {
+      console.error('Prediction failed:', error);
+    }
     setLoading(false);
   };
 
