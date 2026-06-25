@@ -45,9 +45,9 @@ const ImageUpload = ({ onPrediction, predictionData }) => {
     onPrediction(null);
   }, [webcamRef, onPrediction]);
 
- const handleAnalyze = async () => {
+const handleAnalyze = async () => {
     if (!image) return;
-     console.log("API URL:", process.env.REACT_APP_API_URL)
+    console.log("API URL:", process.env.REACT_APP_API_URL);
     setLoading(true);
     try {
       const formData = new FormData();
