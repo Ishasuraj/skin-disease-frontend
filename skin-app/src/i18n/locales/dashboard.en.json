@@ -68,7 +68,7 @@
   },
   "diseaseInfo": {
     "title": "Disease Awareness",
-    "subtitle": "Learn about the 7 skin conditions detected by DermaLens. Click any card to see full details.",
+    "subtitle": "Learn about the 10 skin conditions detected by DermaLens. Click any card to see full details.",
     "more": "More",
     "less": "Less",
     "medicalRef": "Medical Reference",
@@ -80,23 +80,23 @@
     "disclaimer": "Images shown are medical reference illustrations. Always consult a certified dermatologist for proper diagnosis."
   },
   "diseases": {
-    "melanocyticNevi": {
-      "name": "Melanocytic Nevi",
-      "description": "Common moles that are usually harmless. They are clusters of pigmented cells that appear on the skin.",
-      "visualLabel": "Round, dark brown spot",
-      "visualDesc": "Typically appears as a small, evenly pigmented dark spot",
-      "symptoms": ["Brown or black spots", "Round or oval shape", "Smooth edges", "Uniform color"],
-      "causes": ["Genetic factors", "Sun exposure", "Hormonal changes"],
-      "lookFor": ["Symmetrical shape", "Even brown color", "Clear border", "Size < 6mm"]
+    "acne": {
+      "name": "Acne",
+      "description": "A common skin condition where hair follicles become clogged with oil and dead skin cells, causing pimples, blackheads and whiteheads.",
+      "visualLabel": "Red pimples and whiteheads",
+      "visualDesc": "Inflamed red bumps or whiteheads commonly on face, chest and back",
+      "symptoms": ["Pimples and pustules", "Blackheads or whiteheads", "Oily skin", "Scarring after healing"],
+      "causes": ["Excess sebum production", "Bacterial infection", "Hormonal changes", "Clogged pores"],
+      "lookFor": ["Red inflamed bumps", "Whiteheads or blackheads", "Pustules with pus", "Primarily on face and back"]
     },
-    "melanoma": {
-      "name": "Melanoma",
-      "description": "The most serious type of skin cancer, developing in melanocytes. Early detection is critical.",
-      "visualLabel": "Irregular, multicolor lesion",
-      "visualDesc": "Uneven shape with multiple shades — red, black, brown mixed",
-      "symptoms": ["Asymmetric moles", "Irregular borders", "Multiple colors", "Diameter > 6mm"],
-      "causes": ["UV radiation", "Family history", "Weakened immune system"],
-      "lookFor": ["Asymmetric shape", "Ragged border", "Color variation", "Growing in size"]
+    "actinicKeratosis": {
+      "name": "Actinic Keratosis",
+      "description": "Rough, scaly patch caused by years of sun exposure. Considered pre-cancerous and should be monitored.",
+      "visualLabel": "Rough, scaly red patch",
+      "visualDesc": "Dry, rough, scaly patch of skin — typically red, pink or brown",
+      "symptoms": ["Rough scaly patch", "Flat to raised", "Itching or burning", "Hard wart-like surface"],
+      "causes": ["UV exposure", "Tanning beds", "Weakened immunity"],
+      "lookFor": ["Scaly texture", "Pink to red color", "Rough when touched", "Flat or slightly raised"]
     },
     "basalCell": {
       "name": "Basal Cell Carcinoma",
@@ -107,41 +107,68 @@
       "causes": ["Chronic sun exposure", "Radiation therapy", "Fair skin"],
       "lookFor": ["Pearly surface", "Pink or skin-toned", "May have visible vessels", "Slow growing"]
     },
-    "benignKeratosis": {
-      "name": "Benign Keratosis",
-      "description": "Non-cancerous skin growths that commonly appear with age, looking waxy or stuck-on.",
-      "visualLabel": "Waxy, raised patch",
-      "visualDesc": "Rough, waxy or scaly surface — looks stuck on to the skin",
+    "eczema": {
+      "name": "Eczema",
+      "description": "A chronic inflammatory skin condition causing itchy, red and cracked skin. Often linked to allergies or asthma.",
+      "visualLabel": "Red, itchy, inflamed patches",
+      "visualDesc": "Dry, scaly and inflamed skin — commonly on hands, elbows and behind knees",
+      "symptoms": ["Intense itching", "Red inflamed skin", "Dry cracked skin", "Oozing or crusting"],
+      "causes": ["Immune system reaction", "Genetic factors", "Environmental triggers", "Allergens"],
+      "lookFor": ["Itchy red patches", "Dry flaky skin", "Skin thickening", "Common on folds of skin"]
+    },
+    "psoriasis": {
+      "name": "Psoriasis",
+      "description": "A chronic autoimmune condition causing rapid skin cell buildup, resulting in scaling and inflammation.",
+      "visualLabel": "Thick silver-white scales",
+      "visualDesc": "Red patches covered with thick silver or white scaly skin",
+      "symptoms": ["Red patches with scales", "Dry cracked skin", "Itching or burning", "Thickened nails"],
+      "causes": ["Autoimmune response", "Genetic predisposition", "Stress triggers", "Infections"],
+      "lookFor": ["Silver-white scales", "Red inflamed base", "Well-defined edges", "Common on elbows and knees"]
+    },
+    "ringworm": {
+      "name": "Ringworm",
+      "description": "A fungal infection of the skin causing a ring-shaped red rash. Despite the name, it is not caused by a worm.",
+      "visualLabel": "Ring-shaped red rash",
+      "visualDesc": "Circular red ring with clearer skin in the middle — itchy and scaly",
+      "symptoms": ["Ring-shaped rash", "Scaly edges", "Itching", "Redness and inflammation"],
+      "causes": ["Fungal infection (Tinea)", "Contact with infected person", "Sharing personal items", "Warm moist environments"],
+      "lookFor": ["Circular ring shape", "Scaly outer edge", "Clear center", "Itchy red border"]
+    },
+    "rosacea": {
+      "name": "Rosacea",
+      "description": "A chronic skin condition causing redness and visible blood vessels in the face, sometimes with acne-like bumps.",
+      "visualLabel": "Facial redness and flushing",
+      "visualDesc": "Persistent redness across nose and cheeks — may have small pus-filled bumps",
+      "symptoms": ["Facial redness", "Visible blood vessels", "Swollen bumps", "Eye irritation"],
+      "causes": ["Genetics", "Environmental triggers", "Sun exposure", "Hot drinks or spicy food"],
+      "lookFor": ["Redness on nose and cheeks", "Small red bumps", "Flushing easily", "Spider veins on face"]
+    },
+    "seborrheicKeratosis": {
+      "name": "Seborrheic Keratosis",
+      "description": "Common non-cancerous skin growths that appear with age. They look waxy or stuck-on and vary in color.",
+      "visualLabel": "Waxy, stuck-on patch",
+      "visualDesc": "Rough, waxy or scaly surface — looks like it is stuck on to the skin",
       "symptoms": ["Waxy surface", "Stuck-on appearance", "Variable color", "Itching"],
       "causes": ["Aging", "Sun exposure", "Genetics"],
       "lookFor": ["Waxy texture", "Tan to dark brown", "Well-defined edge", "Stuck-on look"]
     },
-    "dermatofibroma": {
-      "name": "Dermatofibroma",
-      "description": "Benign skin growths that commonly appear on the legs as small firm bumps.",
-      "visualLabel": "Small, firm round bump",
-      "visualDesc": "Small raised bump — dimples inward when pinched from both sides",
-      "symptoms": ["Small firm bump", "Brown or red color", "Dimples when pinched", "Slightly raised"],
-      "causes": ["Minor skin injuries", "Insect bites", "Unknown causes"],
-      "lookFor": ["Firm texture", "Reddish-brown", "Dimple sign", "Usually on legs"]
+    "vitiligo": {
+      "name": "Vitiligo",
+      "description": "A condition where skin loses its pigment cells, resulting in white patches on the skin.",
+      "visualLabel": "White depigmented patches",
+      "visualDesc": "Smooth white patches on skin — clearly defined edges where pigment is lost",
+      "symptoms": ["White patches on skin", "Premature hair graying", "Loss of color in mouth", "Symmetrical patches"],
+      "causes": ["Autoimmune disorder", "Genetic factors", "Nerve damage", "Oxidative stress"],
+      "lookFor": ["Chalk-white patches", "Sharp defined borders", "Symmetrical on body", "Hair in patch may be white"]
     },
-    "vascularLesion": {
-      "name": "Vascular Lesion",
-      "description": "Abnormalities of blood vessels visible through the skin surface.",
-      "visualLabel": "Red, vascular patch",
-      "visualDesc": "Bright red or purple — caused by blood vessels near the skin surface",
-      "symptoms": ["Red or purple spots", "Flat or raised", "May bleed", "Spider-like pattern"],
-      "causes": ["Genetics", "Sun damage", "Aging"],
-      "lookFor": ["Bright red color", "Spider veins", "Blanches on pressure", "Irregular shape"]
-    },
-    "actinicKeratosis": {
-      "name": "Actinic Keratosis",
-      "description": "Rough, scaly patch caused by years of sun exposure. Considered pre-cancerous.",
-      "visualLabel": "Rough, scaly red patch",
-      "visualDesc": "Dry, rough, scaly patch of skin — typically red, pink or brown",
-      "symptoms": ["Rough scaly patch", "Flat to raised", "Itching or burning", "Hard wart-like surface"],
-      "causes": ["UV exposure", "Tanning beds", "Weakened immunity"],
-      "lookFor": ["Scaly texture", "Pink to red color", "Rough when touched", "Flat or slightly raised"]
+    "warts": {
+      "name": "Warts",
+      "description": "Small rough growths on the skin caused by human papillomavirus (HPV). Common on hands and feet.",
+      "visualLabel": "Rough raised bumps",
+      "visualDesc": "Small rough bumps with a cauliflower-like texture — skin-colored or darker",
+      "symptoms": ["Rough raised bump", "Cauliflower texture", "Black dots inside", "May be painful on feet"],
+      "causes": ["HPV virus infection", "Direct skin contact", "Cuts or breaks in skin", "Weakened immunity"],
+      "lookFor": ["Rough grainy texture", "Flesh-colored bumps", "Black pinpoint dots", "Common on hands and feet"]
     }
   },
   "precautions": {
