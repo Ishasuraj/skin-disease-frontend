@@ -4,27 +4,31 @@ import Webcam from 'react-webcam';
 import PredictionResult from './PredictionResult';
 import { addDoc, collection, doc, updateDoc, increment, serverTimestamp } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
-import { 
-  Microscope, 
-  Upload, 
-  Camera, 
-  UploadCloud, 
-  FolderOpen, 
-  CheckCircle, 
-  RefreshCw, 
-  Loader2, 
-  Brain, 
-  CameraOff, 
-  RotateCw, 
-  HelpCircle, 
-  Trash2, 
-  Sparkles, 
-  AlertCircle, 
-  Check, 
+import {
+  Microscope,
+  Upload,
+  Camera,
+  UploadCloud,
+  FolderOpen,
+  CheckCircle,
+  RefreshCw,
+  Loader2,
+  Brain,
+  CameraOff,
+  RotateCw,
+  HelpCircle,
+  Trash2,
+  Sparkles,
+  AlertCircle,
+  Check,
   Layers,
-  ScanSearch
+  ScanSearch,
+  ImageIcon,
+  FilePlus,
+  BarChart3
 } from 'lucide-react';
 
+// ──────────────────── HELPER: Consensus Logic ────────────────────
 const getConsensus = (analyzedItems) => {
   if (analyzedItems.length < 2) return null;
 
@@ -71,6 +75,7 @@ const getConsensus = (analyzedItems) => {
   };
 };
 
+// ──────────────────── MAIN COMPONENT ────────────────────
 const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId }) => {
   const { t } = useTranslation();
   const [mode, setMode] = useState('upload');
@@ -83,12 +88,14 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
   const fileInputRef = useRef(null);
   const webcamRef = useRef(null);
 
+  // ─── Helper: Convert base64 to File ──────────────────
   const convertBase64ToFile = async (base64String, filename = 'webcam-capture.jpg') => {
     const res = await fetch(base64String);
     const blob = await res.blob();
     return new File([blob], filename, { type: 'image/jpeg' });
   };
 
+  // ─── Handle file selection ────────────────────────────
   const handleFiles = (files) => {
     if (!files || files.length === 0) return;
     const newImages = Array.from(files)
@@ -124,6 +131,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     if (!selectedImageId) setSelectedImageId(id);
   }, [webcamRef, selectedImageId, setImages, setSelectedImageId]);
 
+  // ─── Save to Firestore ──────────────────────────────
   const savePredictionToFirestore = async (prediction, isConsensus = false, source = 'upload') => {
     const user = auth.currentUser;
     if (!user) return;
@@ -148,6 +156,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     }
   };
 
+  // ─── Run single prediction ───────────────────────────
   const runPrediction = async (img) => {
     setImages(prev => prev.map(item => item.id === img.id ? { ...item, status: 'analyzing', error: null } : item));
     try {
@@ -188,6 +197,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     }
   };
 
+  // ─── Analyze all ready images ────────────────────────
   const handleAnalyzeAll = async () => {
     const targetImages = images.filter(img => img.status === 'ready' || img.status === 'error');
     if (targetImages.length === 0) return;
@@ -254,6 +264,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     setSelectedImageId(null);
   };
 
+  // ─── Memoized values ──────────────────────────────────
   const consensusResult = useMemo(() => {
     const analyzedImages = images.filter(img => img.status === 'success' && img.result);
     return getConsensus(analyzedImages);
@@ -278,33 +289,40 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     return images.find(img => img.id === selectedImageId) || images[0] || null;
   }, [images, selectedImageId, consensusResult]);
 
-  // Get gradcam from active individual image
   const activeGradcam = useMemo(() => {
     if (selectedImageId === 'consensus') return null;
     return activeImage?.result?.gradcam_url || null;
   }, [activeImage, selectedImageId]);
 
+  // ──────────────────── POLISHED UI ────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
 
-      {/* Top Description */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-        <h2 className="text-xl font-bold text-slate-800 dark:text-white mb-1.5 flex items-center gap-2">
-          <Microscope className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          <span>{t('dashboard.scan.title', 'Skin Image Analysis')}</span>
-        </h2>
-        <p className="text-slate-500 dark:text-slate-400 text-sm">
-          {t('dashboard.scan.subtitle', 'Upload multiple skin images or capture webcam photos for a robust consensus prediction.')}
-        </p>
+      {/* ── Header with gradient accent ── */}
+      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 p-6 overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-500 to-indigo-600 rounded-l-2xl" />
+        <div className="flex items-center gap-3">
+          <div className="p-2.5 bg-blue-50 dark:bg-blue-900/30 rounded-xl text-blue-600 dark:text-blue-400">
+            <Microscope className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-slate-800 dark:text-white">
+              {t('dashboard.scan.title', 'Skin Image Analysis')}
+            </h2>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {t('dashboard.scan.subtitle', 'Upload multiple skin images or capture webcam photos for a robust consensus prediction.')}
+            </p>
+          </div>
+        </div>
       </div>
 
-      {/* Main Grid */}
+      {/* ── Main Grid ── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        {/* LEFT COLUMN */}
+        {/* ===== LEFT COLUMN ===== */}
         <div className="lg:col-span-5 space-y-6">
 
-          {/* Uploader / Webcam */}
+          {/* Upload/Webcam Toggle Card */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700">
             <div className="flex bg-slate-100 dark:bg-slate-700 rounded-xl p-1 mb-5">
               <button
@@ -339,22 +357,24 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                 onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                 onDragLeave={() => setDragOver(false)}
                 onClick={() => !isAnalyzingAny && fileInputRef.current?.click()}
-                className={`border-2 border-dashed rounded-2xl p-6 text-center transition-all ${
+                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all ${
                   isAnalyzingAny
                     ? 'border-slate-100 dark:border-slate-800 cursor-not-allowed'
                     : dragOver
-                    ? 'border-blue-400 bg-blue-50/50 dark:bg-blue-900/10 scale-[1.01] cursor-pointer'
+                    ? 'border-blue-400 bg-blue-50/60 dark:bg-blue-900/20 scale-[1.01] shadow-lg shadow-blue-200/50 dark:shadow-blue-900/30'
                     : 'border-slate-200 dark:border-slate-700 hover:border-blue-400 hover:bg-slate-50 dark:hover:bg-slate-700/30 cursor-pointer'
                 }`}
               >
                 <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden"
                   onChange={(e) => handleFiles(e.target.files)} disabled={isAnalyzingAny} />
-                <UploadCloud className={`w-12 h-12 mx-auto mb-3 ${dragOver ? 'text-blue-500 animate-bounce' : 'text-slate-400'}`} />
+                <UploadCloud className={`w-14 h-14 mx-auto mb-4 ${
+                  dragOver ? 'text-blue-500 animate-bounce' : 'text-slate-400'
+                }`} />
                 <p className="text-slate-700 dark:text-slate-300 font-semibold text-sm mb-0.5">
                   {dragOver ? t('dashboard.scan.dropHere', 'Drop images here!') : t('dashboard.scan.dragDrop', 'Drag & drop skin images')}
                 </p>
-                <p className="text-slate-400 text-xs mb-3">{t('dashboard.scan.browse', 'or click to browse')}</p>
-                <span className="inline-flex bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 text-xs px-3 py-1.5 rounded-lg font-bold border border-blue-100 dark:border-blue-900/60">
+                <p className="text-slate-400 text-xs mb-4">{t('dashboard.scan.browse', 'or click to browse')}</p>
+                <span className="inline-flex bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 text-xs px-4 py-2 rounded-lg font-bold border border-blue-100 dark:border-blue-900/60">
                   {t('dashboard.scan.chooseImage', 'Select Images')}
                 </span>
               </div>
@@ -372,7 +392,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                     </button>
                   </div>
                 ) : (
-                  <div className="relative rounded-xl overflow-hidden bg-slate-900 aspect-video max-h-56">
+                  <div className="relative rounded-xl overflow-hidden bg-slate-900 aspect-video max-h-56 border border-slate-200 dark:border-slate-700">
                     {!webcamReady && (
                       <div className="absolute inset-0 flex items-center justify-center bg-slate-800 z-10">
                         <div className="text-center">
@@ -388,21 +408,20 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                       className="w-full h-full object-cover" />
                     {webcamReady && (
                       <>
-                        <div className="absolute top-2 left-2 flex items-center gap-1 bg-black/60 text-white text-[10px] px-2 py-1 rounded-md">
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                        <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-black/60 text-white text-[10px] px-2.5 py-1 rounded-full backdrop-blur-sm">
+                          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
                           {t('dashboard.scan.live', 'LIVE')}
                         </div>
                         <button onClick={() => setFacingMode(f => f === 'user' ? 'environment' : 'user')}
-                          className="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded-md hover:bg-black/80 flex items-center gap-1">
-                          <RotateCw className="w-3 h-3" />
-                          {t('dashboard.scan.flip', 'Flip')}
+                          className="absolute top-2 right-2 bg-black/60 text-white p-1.5 rounded-full hover:bg-black/80 transition-colors">
+                          <RotateCw className="w-4 h-4" />
                         </button>
                       </>
                     )}
                   </div>
                 )}
                 <button onClick={handleCapture} disabled={!webcamReady || isAnalyzingAny}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white py-3 rounded-xl text-sm font-semibold transition-all shadow-md flex items-center justify-center gap-2">
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white py-3 rounded-xl text-sm font-semibold transition-all shadow-md shadow-blue-200 dark:shadow-blue-900/40 flex items-center justify-center gap-2">
                   <Camera className="w-4 h-4" />
                   {t('dashboard.scan.capture', 'Capture Spot Image')}
                 </button>
@@ -414,13 +433,14 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
           {images.length > 0 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700 space-y-4">
               <div className="flex items-center justify-between">
-                <div>
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-slate-500" />
                   <h3 className="font-bold text-slate-800 dark:text-white text-sm">
-                    {t('dashboard.scan.spotsList', 'Uploaded Spot Images')} ({images.length})
+                    {t('dashboard.scan.spotsList', 'Uploaded Spot Images')}
                   </h3>
-                  {analyzedImagesCount > 0 && (
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">{analyzedImagesCount} of {images.length} analyzed</p>
-                  )}
+                  <span className="text-xs font-semibold bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded-full">
+                    {images.length}
+                  </span>
                 </div>
                 <button onClick={handleClearAll} disabled={isAnalyzingAny}
                   className="text-xs text-red-500 hover:text-red-600 font-semibold disabled:opacity-40">
@@ -442,18 +462,26 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                       className={`relative aspect-square rounded-xl overflow-hidden cursor-pointer border bg-slate-50 dark:bg-slate-900 group transition-all hover:scale-[1.02] ${borderStyle}`}>
                       <img src={img.preview} alt={`Spot ${idx + 1}`} className="w-full h-full object-cover" />
                       <button onClick={(e) => handleRemoveImage(img.id, e)} disabled={isAnalyzingAny}
-                        className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/60 hover:bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 disabled:opacity-40">
-                        <Trash2 className="w-3 h-3" />
+                        className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/60 hover:bg-red-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity disabled:opacity-40">
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
-                      {img.status === 'success' && <div className="absolute top-1 left-1 bg-green-500 text-white rounded-full p-0.5"><Check className="w-2.5 h-2.5 stroke-[3]" /></div>}
-                      {img.status === 'error' && <div className="absolute top-1 left-1 bg-red-500 text-white rounded-full p-0.5"><AlertCircle className="w-2.5 h-2.5 stroke-[3]" /></div>}
+                      {img.status === 'success' && (
+                        <div className="absolute top-1 left-1 bg-green-500 text-white rounded-full p-0.5">
+                          <Check className="w-3 h-3 stroke-[3]" />
+                        </div>
+                      )}
+                      {img.status === 'error' && (
+                        <div className="absolute top-1 left-1 bg-red-500 text-white rounded-full p-0.5">
+                          <AlertCircle className="w-3 h-3 stroke-[3]" />
+                        </div>
+                      )}
                       {img.status === 'analyzing' && (
                         <div className="absolute inset-0 bg-blue-900/20 backdrop-blur-[1px] flex items-center justify-center">
-                          <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
+                          <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
                         </div>
                       )}
                       {img.status === 'success' && img.result && (
-                        <div className="absolute bottom-0 inset-x-0 bg-black/70 text-white text-[9px] py-0.5 px-1 truncate font-medium text-center">
+                        <div className="absolute bottom-0 inset-x-0 bg-black/70 text-white text-[9px] py-1 px-1.5 truncate font-medium text-center">
                           {img.result.disease} ({img.result.confidence}%)
                         </div>
                       )}
@@ -464,7 +492,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
 
               {readyImagesCount > 0 && (
                 <button onClick={handleAnalyzeAll} disabled={loading || isAnalyzingAny}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white py-3 rounded-xl text-sm font-semibold transition-all shadow-lg flex items-center justify-center gap-2">
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white py-3.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-blue-200 dark:shadow-blue-900/30 flex items-center justify-center gap-2">
                   {loading ? (
                     <><Loader2 className="w-4 h-4 animate-spin" />{t('dashboard.scan.analyzing', 'Analyzing...')}</>
                   ) : (
@@ -479,7 +507,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900/60 rounded-xl p-4 flex gap-3">
             <HelpCircle className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
             <div className="text-xs text-blue-800 dark:text-blue-300 space-y-1.5">
-              <p className="font-semibold">{t('dashboard.scan.tipTitle', 'Tips for Better Analysis')}</p>
+              <p className="font-semibold">{t('dashboard.scan.tipTitle', '💡 Tips for Better Analysis')}</p>
               <ul className="list-disc list-inside space-y-1 pl-1">
                 <li>{t('dashboard.scan.tip1', 'Ensure good, bright lighting on the spot.')}</li>
                 <li>{t('dashboard.scan.tip2', 'Upload multiple angles or distances of the same skin area.')}</li>
@@ -488,7 +516,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
             </div>
           </div>
 
-          {/* GRAD-CAM — shown in left column for individual predictions only */}
+          {/* Grad-CAM (only for individual predictions) */}
           {activeGradcam && selectedImageId !== 'consensus' && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700">
               <div className="flex items-center gap-2 mb-4">
@@ -502,7 +530,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">
                     {t('dashboard.prediction.heatmap', 'AI Focus Heatmap')}
                   </p>
-                  <div className="rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-700">
+                  <div className="rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-700">
                     <img src={activeGradcam} alt="Grad-CAM Heatmap" className="w-full object-contain max-h-56" />
                   </div>
                 </div>
@@ -510,25 +538,24 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">
                     {t('dashboard.prediction.original', 'Original Image')}
                   </p>
-                  <div className="rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-700">
+                  <div className="rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-700">
                     <img src={activeImage?.preview} alt="Original" className="w-full object-contain max-h-56" />
                   </div>
                 </div>
               </div>
             </div>
           )}
-
         </div>
 
-        {/* RIGHT COLUMN */}
+        {/* ===== RIGHT COLUMN ===== */}
         <div className="lg:col-span-7">
 
           {images.length === 0 && (
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-12 text-center border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col items-center justify-center min-h-[400px]">
-              <div className="w-16 h-16 rounded-2xl bg-blue-50 dark:bg-blue-950/55 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4 border border-blue-100 dark:border-blue-900/50">
-                <Layers className="w-7 h-7" />
+              <div className="w-20 h-20 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-5 border border-blue-100 dark:border-blue-900/50">
+                <Layers className="w-9 h-9" />
               </div>
-              <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">
+              <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">
                 {t('dashboard.scan.awaitingImages', 'Awaiting Skin Images')}
               </h3>
               <p className="text-slate-400 text-sm max-w-sm">
@@ -540,37 +567,38 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
           {images.length > 0 && (
             <div className="space-y-6">
 
-              {/* Tab selector */}
+              {/* Tab selector for consensus vs individual */}
               {consensusResult && (
                 <div className="bg-white dark:bg-slate-800 p-1.5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex gap-2">
                   <button onClick={() => setSelectedImageId('consensus')}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${
                       selectedImageId === 'consensus'
-                        ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow'
+                        ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-200/60 dark:shadow-blue-900/40'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                     }`}>
-                    <Sparkles className="w-3.5 h-3.5" />
-                    {t('dashboard.scan.consensusReport', '✨ Combined Consensus Report')}
+                    <Sparkles className="w-4 h-4" />
+                    {t('dashboard.scan.consensusReport', '✨ Combined Consensus')}
                   </button>
                   <button onClick={() => {
                     const firstSuccess = images.find(img => img.status === 'success');
                     setSelectedImageId(firstSuccess ? firstSuccess.id : images[0].id);
                   }}
-                    className={`flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${
                       selectedImageId !== 'consensus'
                         ? 'bg-slate-100 dark:bg-slate-700 text-blue-600 dark:text-blue-400'
                         : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700'
                     }`}>
-                    <Layers className="w-3.5 h-3.5" />
-                    {t('dashboard.scan.individualSpots', 'Individual Spot Results')}
+                    <Layers className="w-4 h-4" />
+                    {t('dashboard.scan.individualSpots', 'Individual Spots')}
                   </button>
                 </div>
               )}
 
-              {/* CONSENSUS PANEL — no gradcam */}
+              {/* Consensus Panel */}
               {selectedImageId === 'consensus' && consensusResult && (
                 <div className="space-y-4">
-                  <div className="bg-gradient-to-r from-blue-500/10 to-indigo-600/10 dark:from-blue-950/20 dark:to-indigo-950/20 rounded-2xl p-5 border border-blue-100/50 dark:border-blue-900/30 flex gap-4 items-center">
+                  <div className="relative bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 dark:from-blue-950/30 dark:via-indigo-950/30 dark:to-purple-950/30 rounded-2xl p-5 border border-blue-100/50 dark:border-blue-900/30 flex gap-4 items-center overflow-hidden">
+                    <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-500 to-indigo-600" />
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shadow-md shrink-0">
                       <Sparkles className="w-6 h-6 animate-pulse" />
                     </div>
@@ -587,7 +615,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                 </div>
               )}
 
-              {/* INDIVIDUAL PANEL */}
+              {/* Individual Panel */}
               {selectedImageId !== 'consensus' && activeImage && (
                 <div className="space-y-6">
                   <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-100 dark:border-slate-700 space-y-4">
@@ -597,7 +625,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                         {t('dashboard.scan.spotDetails', 'Spot Details')}
                       </h3>
                       <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
-                        {activeImage.id.startsWith('webcam') ? 'Webcam Snap' : 'Uploaded Image'}
+                        {activeImage.id.startsWith('webcam') ? '📷 Webcam Snap' : '📁 Uploaded Image'}
                       </span>
                     </div>
 

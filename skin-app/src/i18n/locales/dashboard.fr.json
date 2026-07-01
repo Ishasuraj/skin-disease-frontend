@@ -68,8 +68,7 @@
   },
   "diseaseInfo": {
     "title": "Sensibilisation à la maladie",
-    "subtitle": "Découvrez les 7 affections cutanées détectées par DermaLens. Cliquez sur n'importe quelle carte pour voir tous les détails.",
-    "more": "Plus",
+    "subtitle": "Découvrez les 10 maladies de la peau détectées par DermaLens. Cliquez sur n'importe quelle carte pour voir tous les détails.",
     "less": "Moins",
     "medicalRef": "Référent·e médical",
     "lookFor": "Quoi rechercher",
@@ -80,168 +79,249 @@
     "disclaimer": "Les images présentées sont des illustrations de référence médicale. Consultez toujours un dermatologue certifié pour un diagnostic approprié."
   },
   "diseases": {
-    "melanocyticNevi": {
-      "name": "MELANOME BENIGNE",
-      "description": "Taupes communes qui sont généralement inoffensives. Ce sont des amas de cellules pigmentées qui apparaissent sur la peau.",
-      "visualLabel": "Rond, tache brun foncé",
-      "visualDesc": "Apparaît généralement comme une petite tache sombre uniformément pigmentée",
-      "symptoms": [
-        "Taches brunes ou noires",
-        "Forme ronde ou ovale",
-        "abattre les arêtes",
-        "Choisir le motif"
-      ],
-      "causes": [
-        "Des facteurs génétiques",
-        "Exposition au soleil",
-        "Les changements hormonaux"
-      ],
-      "lookFor": [
-        "Forme symétrique",
-        "Couleur marron",
-        "Effacer la bordure",
-        "Taille < 6 mm"
-      ]
-    },
-    "melanoma": {
-      "name": "Mélanome",
-      "description": "Le type de cancer de la peau le plus grave, se développant dans les mélanocytes. La détection précoce est essentielle.",
-      "visualLabel": "Lésion irrégulière, multicolore",
-      "visualDesc": "Forme irrégulière avec plusieurs nuances — rouge, noir, marron mélangé",
-      "symptoms": [
-        "Taupes asymétriques",
-        "Frontières irrégulières",
-        "Couleurs multiples",
-        "Diamètre : 6 mm"
-      ],
-      "causes": [
-        "Rayonnement UV",
-        "Antécédents familiaux ",
-        "Affaiblissement du système immunitaire"
-      ],
-      "lookFor": [
-        "Forme asymétrique",
-        "Bordure déchiquetée",
-        "Variation de teinte",
-        "Grandir en taille"
-      ]
-    },
-    "basalCell": {
-      "name": "Epithelioma basocellulaire",
-      "description": "Cancer de la peau le plus fréquent. Se propage rarement mais a besoin d'un traitement. Ressemble souvent à une bosse nacrée.",
-      "visualLabel": "Bosse nacrée et rosâtre",
-      "visualDesc": "Bosse brillante et translucide avec un aspect nacré ou cireux",
-      "symptoms": [
-        "Bosse nacrée",
-        "Lésion plate ressemblant à une cicatrice",
-        "Saignement douloureux",
-        "Croissance rose"
-      ],
-      "causes": [
-        "Exposition chronique au soleil",
-        "Radiothérapie",
-        "Homme de la peau"
-      ],
-      "lookFor": [
-        "Surface nacrée",
-        "Rose ou couleur peau",
-        "Peut avoir des vaisseaux visibles",
-        "Arbre à croissance lente."
-      ]
-    },
-    "benignKeratosis": {
-      "name": "Kératose bénigne",
-      "description": "Croissances cutanées non cancéreuses qui apparaissent généralement avec l'âge, qui ont l'air cireuses ou collées.",
-      "visualLabel": "Patch en relief cireux",
-      "visualDesc": "Surface rugueuse, cireuse ou squameuse — semble collée sur la peau",
-      "symptoms": [
-        "Surface cireuse",
-        "Aspect coincé",
-        "LAMPE A COULEUR VARIABLE",
-        "Démangeaisons"
-      ],
-      "causes": [
-        "Vieillissement",
-        "Exposition au soleil",
-        "Génétique"
-      ],
-      "lookFor": [
-        "Texture cireuse",
-        "Brun fauve à brun foncé",
-        "Bord bien défini",
-        "Look coincé"
-      ]
-    },
-    "dermatofibroma": {
-      "name": "Angiome sclérosant",
-      "description": "Croissances cutanées bénignes qui apparaissent généralement sur les jambes sous forme de petites bosses fermes.",
-      "visualLabel": "Petite bosse ronde ferme",
-      "visualDesc": "Petite bosse surélevée — fossettes vers l'intérieur lorsqu'elle est pincée des deux côtés",
-      "symptoms": [
-        "Petite bosse ferme",
-        "Couleur marron ou rouge",
-        "Les fossettes lorsqu'elles sont pincées",
-        "Légèrement surélevé"
-      ],
-      "causes": [
-        "Lésions cutanées mineures",
-        "Piqûre d'insecte",
-        "Causes inconnues"
-      ],
-      "lookFor": [
-        "tissu consistant",
-        "Brun",
-        "Pancarte « Dimple",
-        "Habituellement sur les jambes"
-      ]
-    },
-    "vascularLesion": {
-      "name": "lésion vasculaire",
-      "description": "Anomalies des vaisseaux sanguins visibles à travers la surface de la peau.",
-      "visualLabel": "Patch vasculaire rouge",
-      "visualDesc": "Rouge vif ou violet — causé par les vaisseaux sanguins près de la surface de la peau",
-      "symptoms": [
-        "Taches rouges ou violettes",
-        "Plat ou surélevé",
-        "Peut saigner",
-        "Motif araignée"
-      ],
-      "causes": [
-        "Génétique",
-        "Effets nuisibles du soleil",
-        "Vieillissement"
-      ],
-      "lookFor": [
-        "Couleur rouge vif",
-        "Télangiectasie",
-        "Blanches à la pression",
-        "Forme irrégulière"
-      ]
-    },
-    "actinicKeratosis": {
-      "name": "Kératome sénile",
-      "description": "Patch rugueux et écailleux causé par des années d'exposition au soleil. Considéré comme précancéreux.",
-      "visualLabel": "Tache rouge rugueuse et squameuse",
-      "visualDesc": "Patch cutané sec, rugueux et squameux — généralement rouge, rose ou brun",
-      "symptoms": [
-        "Patch écailleux rugueux",
-        "Plat à surélevé",
-        "Démangeaisons ou brûlures",
-        "Surface dure semblable à une verrue"
-      ],
-      "causes": [
-        "exposition aux UV",
-        "Lits de bronzage",
-        "IMMUNITÉ AFFAIBLIE"
-      ],
-      "lookFor": [
-        "Texture écailleuse",
-        "Couleur rose à rouge",
-        "Brute au toucher",
-        "Plat ou légèrement surélevé"
-      ]
-    }
+  "acne": {
+    "name": "Acné",
+    "description": "Une affection cutanée courante causée par l'obstruction des pores par le sébum et les cellules mortes.",
+    "visualLabel": "Boutons rouges",
+    "visualDesc": "Boutons rouges apparaissant sur le visage, la poitrine et le dos",
+    "symptoms": [
+      "Boutons",
+      "Points noirs",
+      "Peau grasse",
+      "Cicatrices"
+    ],
+    "causes": [
+      "Excès de sébum",
+      "Bactéries",
+      "Changements hormonaux",
+      "Pores obstrués"
+    ],
+    "lookFor": [
+      "Boutons rouges",
+      "Points blancs",
+      "Pustules",
+      "Visage et dos"
+    ]
   },
+
+  "actinicKeratosis": {
+    "name": "Kératose actinique",
+    "description": "Plaque rugueuse et squameuse causée par des années d'exposition au soleil. Considérée comme précancéreuse.",
+    "visualLabel": "Plaque rouge squameuse",
+    "visualDesc": "Zone sèche, rugueuse et squameuse, généralement rouge, rose ou brune",
+    "symptoms": [
+      "Plaque rugueuse",
+      "Surface squameuse",
+      "Démangeaisons",
+      "Sensation de brûlure"
+    ],
+    "causes": [
+      "Exposition aux UV",
+      "Cabines de bronzage",
+      "Immunité affaiblie"
+    ],
+    "lookFor": [
+      "Texture rugueuse",
+      "Couleur rouge ou rose",
+      "Surface squameuse",
+      "Légèrement surélevée"
+    ]
+  },
+
+  "basalCell": {
+    "name": "Carcinome basocellulaire",
+    "description": "Le cancer de la peau le plus fréquent. Il se propage rarement mais nécessite un traitement.",
+    "visualLabel": "Bosse rosée nacrée",
+    "visualDesc": "Bosse brillante et translucide avec un aspect nacré",
+    "symptoms": [
+      "Bosse nacrée",
+      "Lésion plate",
+      "Saignement",
+      "Croissance rosée"
+    ],
+    "causes": [
+      "Exposition prolongée au soleil",
+      "Radiothérapie",
+      "Peau claire"
+    ],
+    "lookFor": [
+      "Surface nacrée",
+      "Couleur rose",
+      "Vaisseaux visibles",
+      "Croissance lente"
+    ]
+  },
+
+  "eczema": {
+    "name": "Eczéma",
+    "description": "Une maladie chronique de la peau provoquant des démangeaisons et une inflammation.",
+    "visualLabel": "Plaques rouges et irritées",
+    "visualDesc": "Peau sèche, rouge et enflammée",
+    "symptoms": [
+      "Démangeaisons",
+      "Rougeur",
+      "Peau sèche",
+      "Desquamation"
+    ],
+    "causes": [
+      "Système immunitaire",
+      "Génétique",
+      "Environnement",
+      "Allergies"
+    ],
+    "lookFor": [
+      "Plaques rouges",
+      "Peau sèche",
+      "Peau épaissie",
+      "Plis cutanés"
+    ]
+  },
+
+  "psoriasis": {
+    "name": "Psoriasis",
+    "description": "Une maladie auto-immune entraînant une croissance rapide des cellules cutanées.",
+    "visualLabel": "Plaques squameuses blanches",
+    "visualDesc": "Plaques rouges recouvertes de squames blanches",
+    "symptoms": [
+      "Plaques rouges",
+      "Démangeaisons",
+      "Peau sèche",
+      "Modifications des ongles"
+    ],
+    "causes": [
+      "Maladie auto-immune",
+      "Génétique",
+      "Stress",
+      "Infections"
+    ],
+    "lookFor": [
+      "Squames argentées",
+      "Fond rouge",
+      "Bordures nettes",
+      "Genoux et coudes"
+    ]
+  },
+
+  "ringworm": {
+    "name": "Teigne",
+    "description": "Une infection fongique de la peau.",
+    "visualLabel": "Plaque rouge circulaire",
+    "visualDesc": "Anneau rouge avec un centre plus clair",
+    "symptoms": [
+      "Plaques circulaires",
+      "Démangeaisons",
+      "Desquamation",
+      "Rougeur"
+    ],
+    "causes": [
+      "Infection fongique",
+      "Contact direct",
+      "Objets partagés",
+      "Humidité"
+    ],
+    "lookFor": [
+      "Forme circulaire",
+      "Bords squameux",
+      "Centre clair",
+      "Démangeaisons"
+    ]
+  },
+
+  "rosacea": {
+    "name": "Rosacée",
+    "description": "Une maladie chronique provoquant des rougeurs du visage.",
+    "visualLabel": "Rougeur faciale",
+    "visualDesc": "Rougeur persistante des joues et du nez",
+    "symptoms": [
+      "Rougeur du visage",
+      "Vaisseaux visibles",
+      "Petites bosses",
+      "Irritation des yeux"
+    ],
+    "causes": [
+      "Génétique",
+      "Environnement",
+      "Exposition solaire",
+      "Aliments épicés"
+    ],
+    "lookFor": [
+      "Joues rouges",
+      "Petites bosses",
+      "Rougeurs fréquentes",
+      "Vaisseaux visibles"
+    ]
+  },
+
+  "seborrheicKeratosis": {
+    "name": "Kératose séborrhéique",
+    "description": "Une excroissance cutanée bénigne fréquente avec l'âge.",
+    "visualLabel": "Plaque cireuse",
+    "visualDesc": "Lésion rugueuse et cireuse semblant collée à la peau",
+    "symptoms": [
+      "Surface cireuse",
+      "Variation de couleur",
+      "Démangeaisons"
+    ],
+    "causes": [
+      "Vieillissement",
+      "Exposition solaire",
+      "Génétique"
+    ],
+    "lookFor": [
+      "Texture cireuse",
+      "Couleur brune",
+      "Bord net",
+      "Aspect collé"
+    ]
+  },
+
+  "vitiligo": {
+    "name": "Vitiligo",
+    "description": "Une maladie entraînant une perte de pigmentation de la peau.",
+    "visualLabel": "Taches blanches",
+    "visualDesc": "Zones blanches bien délimitées",
+    "symptoms": [
+      "Taches blanches",
+      "Blanchiment des cheveux",
+      "Perte de pigmentation"
+    ],
+    "causes": [
+      "Maladie auto-immune",
+      "Génétique",
+      "Atteinte nerveuse"
+    ],
+    "lookFor": [
+      "Zones blanches",
+      "Bordures nettes",
+      "Symétrie",
+      "Cheveux blancs"
+    ]
+  },
+
+  "warts": {
+    "name": "Verrues",
+    "description": "Petites excroissances cutanées causées par le virus HPV.",
+    "visualLabel": "Petites bosses rugueuses",
+    "visualDesc": "Petites excroissances ressemblant à un chou-fleur",
+    "symptoms": [
+      "Bosses",
+      "Points noirs",
+      "Douleur"
+    ],
+    "causes": [
+      "Virus HPV",
+      "Contact direct",
+      "Blessures",
+      "Faible immunité"
+    ],
+    "lookFor": [
+      "Surface rugueuse",
+      "Couleur de peau",
+      "Points noirs",
+      "Mains et pieds"
+    ]
+  }
+},
   "precautions": {
     "title": "Précautions et soins de la peau",
     "subtitle": "Suivez ces directives pour maintenir une peau saine et prévenir les maladies de la peau.",

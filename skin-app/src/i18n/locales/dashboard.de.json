@@ -1,188 +1,451 @@
 {
-  "language": "Language",
-  "user": "User",
+  "language": "Sprache",
+  "user": "Benutzer",
   "adminBadge": "Admin",
-  "logout": "Logout",
-  "welcomeBack": "Welcome back, {{name}}",
+  "logout": "Abmelden",
+  "welcomeBack": "Willkommen zurück, {{name}}",
+
   "nav": {
-    "scan": "Scan & Predict",
-    "disease": "Disease Info",
-    "precautions": "Precautions",
-    "profile": "My Profile",
-    "admin": "Admin Panel"
+    "scan": "Scannen & Vorhersage",
+    "disease": "Krankheitsinformationen",
+    "precautions": "Vorsichtsmaßnahmen",
+    "profile": "Mein Profil",
+    "admin": "Admin-Bereich"
   },
+
   "adminPanel": {
-    "title": "Admin Panel",
-    "description": "Access the full admin dashboard to manage users, view analytics and predictions.",
-    "open": "Open Admin Dashboard"
+    "title": "Admin-Bereich",
+    "description": "Zugriff auf das vollständige Admin-Dashboard zur Verwaltung von Benutzern, Analysen und Vorhersagen.",
+    "open": "Admin-Dashboard öffnen"
   },
+
   "severity": {
-    "low": "Low",
-    "medium": "Medium",
-    "high": "High",
-    "risk": "{{level}} Risk",
-    "benign": "Generally benign",
-    "monitor": "Monitor closely",
-    "urgent": "See a doctor soon"
+    "low": "Niedrig",
+    "medium": "Mittel",
+    "high": "Hoch",
+    "risk": "{{level}} Risiko",
+    "benign": "In der Regel gutartig",
+    "monitor": "Genau beobachten",
+    "urgent": "Bald einen Arzt aufsuchen"
   },
+
   "scan": {
-    "title": "Skin Image Analysis",
-    "subtitle": "Upload an image or use your live webcam for instant AI skin analysis.",
-    "upload": "Upload",
+    "title": "Hautbildanalyse",
+    "subtitle": "Laden Sie ein Bild hoch oder verwenden Sie Ihre Live-Webcam für eine sofortige KI-Hautanalyse.",
+    "upload": "Hochladen",
     "webcam": "Webcam",
-    "dropHere": "Drop it here!",
-    "dragDrop": "Drag & drop your image",
-    "browse": "or click to browse files",
-    "chooseImage": "Choose Image",
-    "fileTypes": "Supports JPG, PNG, WEBP — max 10MB",
-    "ready": "Ready to Analyze",
-    "chooseDifferent": "Choose Different",
-    "analyzing": "Analyzing...",
-    "analyze": "Analyze Image",
-    "cameraDenied": "Camera Access Denied",
-    "cameraHint": "Please allow camera access in your browser settings and try again.",
-    "tryAgain": "Try Again",
-    "startingCamera": "Starting camera...",
+    "dropHere": "Hier ablegen!",
+    "dragDrop": "Bild per Drag & Drop einfügen",
+    "browse": "oder klicken, um Dateien auszuwählen",
+    "chooseImage": "Bild auswählen",
+    "fileTypes": "Unterstützt JPG, PNG, WEBP — max. 10 MB",
+    "ready": "Bereit zur Analyse",
+    "chooseDifferent": "Anderes Bild wählen",
+    "analyzing": "Analyse läuft...",
+    "analyze": "Bild analysieren",
+    "cameraDenied": "Kamerazugriff verweigert",
+    "cameraHint": "Bitte erlauben Sie den Kamerazugriff in den Browsereinstellungen.",
+    "tryAgain": "Erneut versuchen",
+    "startingCamera": "Kamera wird gestartet...",
     "live": "LIVE",
-    "flip": "Flip",
-    "tip": "Position the skin area inside the blue frame. Ensure good lighting for better accuracy.",
-    "capture": "Capture Image",
-    "captured": "Captured",
-    "retake": "Retake",
-    "loadingTitle": "Analyzing Skin Pattern...",
-    "loadingSubtitle": "CNN model is processing your image. Please wait.",
-    "loadingModel": "Running deep learning model..."
+    "flip": "Umdrehen",
+    "tip": "Platzieren Sie die Haut im blauen Rahmen. Gute Beleuchtung verbessert die Genauigkeit.",
+    "capture": "Bild aufnehmen",
+    "captured": "Aufgenommen",
+    "retake": "Neu aufnehmen",
+    "loadingTitle": "Hautmuster wird analysiert...",
+    "loadingSubtitle": "Das CNN-Modell verarbeitet Ihr Bild. Bitte warten.",
+    "loadingModel": "Deep-Learning-Modell läuft..."
   },
+
   "prediction": {
-    "title": "AI Prediction Result",
-    "condition": "DETECTED CONDITION",
-    "confidence": "CONFIDENCE SCORE",
-    "severity": "SEVERITY LEVEL",
-    "probabilities": "Prediction Probabilities",
-    "gradcamTitle": "Grad-CAM Visualization",
-    "original": "ORIGINAL IMAGE",
-    "heatmap": "AI FOCUS HEATMAP",
-    "heatmapPending": "Heatmap will appear here once Flask backend is connected",
-    "disclaimer": "This is an AI prediction for awareness only. Please consult a certified dermatologist for proper diagnosis.",
-    "others": "Others"
+    "title": "KI-Vorhersageergebnis",
+    "condition": "ERKANNTE ERKRANKUNG",
+    "confidence": "VERTRAUENSWERTUNG",
+    "severity": "SCHWEREGRAD",
+    "probabilities": "Vorhersagewahrscheinlichkeiten",
+    "gradcamTitle": "Grad-CAM-Visualisierung",
+    "original": "ORIGINALBILD",
+    "heatmap": "KI-FOKUS-HEATMAP",
+    "heatmapPending": "Heatmap erscheint, sobald das Flask-Backend verbunden ist",
+    "disclaimer": "Dies ist nur eine KI-basierte Einschätzung. Bitte konsultieren Sie einen Dermatologen.",
+    "others": "Andere"
   },
+
   "diseaseInfo": {
-    "title": "Disease Awareness",
-    "subtitle": "Learn about the 7 skin conditions detected by DermaLens. Click any card to see full details.",
-    "more": "More",
-    "less": "Less",
-    "medicalRef": "Medical Reference",
-    "lookFor": "What to Look For",
-    "symptoms": "Symptoms",
-    "causes": "Causes",
-    "highWarning": "High risk — consult a dermatologist immediately if you notice these symptoms.",
-    "mediumWarning": "Medium risk — monitor regularly and see a doctor if symptoms worsen.",
-    "disclaimer": "Images shown are medical reference illustrations. Always consult a certified dermatologist for proper diagnosis."
+    "title": "Aufklärung über Hautkrankheiten",
+    "subtitle": "Erfahren Sie mehr über die 10 von DermaLens erkannten Hauterkrankungen. Klicken Sie auf eine Karte für Details.",
+    "more": "Mehr",
+    "less": "Weniger",
+    "medicalRef": "Medizinische Referenz",
+    "lookFor": "Worauf zu achten ist",
+    "symptoms": "Symptome",
+    "causes": "Ursachen",
+    "highWarning": "Hohes Risiko – sofort einen Dermatologen aufsuchen.",
+    "mediumWarning": "Mittleres Risiko – regelmäßig beobachten.",
+    "disclaimer": "Die Bilder dienen nur als medizinische Referenz. Bitte konsultieren Sie einen Arzt."
   },
-  "diseases": {
-    "melanocyticNevi": {
-      "name": "Melanocytic Nevi",
-      "description": "Common moles that are usually harmless. They are clusters of pigmented cells that appear on the skin.",
-      "visualLabel": "Round, dark brown spot",
-      "visualDesc": "Typically appears as a small, evenly pigmented dark spot",
-      "symptoms": ["Brown or black spots", "Round or oval shape", "Smooth edges", "Uniform color"],
-      "causes": ["Genetic factors", "Sun exposure", "Hormonal changes"],
-      "lookFor": ["Symmetrical shape", "Even brown color", "Clear border", "Size < 6mm"]
-    },
-    "melanoma": {
-      "name": "Melanoma",
-      "description": "The most serious type of skin cancer, developing in melanocytes. Early detection is critical.",
-      "visualLabel": "Irregular, multicolor lesion",
-      "visualDesc": "Uneven shape with multiple shades — red, black, brown mixed",
-      "symptoms": ["Asymmetric moles", "Irregular borders", "Multiple colors", "Diameter > 6mm"],
-      "causes": ["UV radiation", "Family history", "Weakened immune system"],
-      "lookFor": ["Asymmetric shape", "Ragged border", "Color variation", "Growing in size"]
-    },
-    "basalCell": {
-      "name": "Basal Cell Carcinoma",
-      "description": "Most common skin cancer. Rarely spreads but needs treatment. Often looks like a pearly bump.",
-      "visualLabel": "Pearly, pinkish bump",
-      "visualDesc": "Shiny, translucent bump with a pearly or waxy appearance",
-      "symptoms": ["Pearly bump", "Flat scar-like lesion", "Bleeding sore", "Pink growth"],
-      "causes": ["Chronic sun exposure", "Radiation therapy", "Fair skin"],
-      "lookFor": ["Pearly surface", "Pink or skin-toned", "May have visible vessels", "Slow growing"]
-    },
-    "benignKeratosis": {
-      "name": "Benign Keratosis",
-      "description": "Non-cancerous skin growths that commonly appear with age, looking waxy or stuck-on.",
-      "visualLabel": "Waxy, raised patch",
-      "visualDesc": "Rough, waxy or scaly surface — looks stuck on to the skin",
-      "symptoms": ["Waxy surface", "Stuck-on appearance", "Variable color", "Itching"],
-      "causes": ["Aging", "Sun exposure", "Genetics"],
-      "lookFor": ["Waxy texture", "Tan to dark brown", "Well-defined edge", "Stuck-on look"]
-    },
-    "dermatofibroma": {
-      "name": "Dermatofibroma",
-      "description": "Benign skin growths that commonly appear on the legs as small firm bumps.",
-      "visualLabel": "Small, firm round bump",
-      "visualDesc": "Small raised bump — dimples inward when pinched from both sides",
-      "symptoms": ["Small firm bump", "Brown or red color", "Dimples when pinched", "Slightly raised"],
-      "causes": ["Minor skin injuries", "Insect bites", "Unknown causes"],
-      "lookFor": ["Firm texture", "Reddish-brown", "Dimple sign", "Usually on legs"]
-    },
-    "vascularLesion": {
-      "name": "Vascular Lesion",
-      "description": "Abnormalities of blood vessels visible through the skin surface.",
-      "visualLabel": "Red, vascular patch",
-      "visualDesc": "Bright red or purple — caused by blood vessels near the skin surface",
-      "symptoms": ["Red or purple spots", "Flat or raised", "May bleed", "Spider-like pattern"],
-      "causes": ["Genetics", "Sun damage", "Aging"],
-      "lookFor": ["Bright red color", "Spider veins", "Blanches on pressure", "Irregular shape"]
-    },
-    "actinicKeratosis": {
-      "name": "Actinic Keratosis",
-      "description": "Rough, scaly patch caused by years of sun exposure. Considered pre-cancerous.",
-      "visualLabel": "Rough, scaly red patch",
-      "visualDesc": "Dry, rough, scaly patch of skin — typically red, pink or brown",
-      "symptoms": ["Rough scaly patch", "Flat to raised", "Itching or burning", "Hard wart-like surface"],
-      "causes": ["UV exposure", "Tanning beds", "Weakened immunity"],
-      "lookFor": ["Scaly texture", "Pink to red color", "Rough when touched", "Flat or slightly raised"]
-    }
+
+ "diseases": {
+  "acne": {
+    "name": "Akne",
+    "description": "Häufige Hauterkrankung, bei der Haarfollikel durch Öl und abgestorbene Hautzellen verstopfen und Pickel, Mitesser und Whiteheads entstehen.",
+    "visualLabel": "Rote Pickel und Whiteheads",
+    "visualDesc": "Entzündete rote Pickel oder Whiteheads im Gesicht, auf Brust und Rücken",
+    "symptoms": [
+      "Pickel und Pusteln",
+      "Mitesser oder Whiteheads",
+      "Fettige Haut",
+      "Narben nach Abheilung"
+    ],
+    "causes": [
+      "Übermäßige Talgproduktion",
+      "Bakterielle Infektion",
+      "Hormonelle Veränderungen",
+      "Verstopfte Poren"
+    ],
+    "lookFor": [
+      "Rote entzündete Pickel",
+      "Mitesser oder Whiteheads",
+      "Eitergefüllte Pusteln",
+      "Vor allem Gesicht und Rücken"
+    ]
   },
+
+  "actinicKeratosis": {
+    "name": "Aktinische Keratose",
+    "description": "Raue, schuppige Hautstellen durch jahrelange Sonneneinstrahlung. Gilt als Krebsvorstufe.",
+    "visualLabel": "Raue, schuppige rote Stelle",
+    "visualDesc": "Trockene, raue, schuppige Hautstelle – meist rot, rosa oder braun",
+    "symptoms": [
+      "Raue schuppige Stelle",
+      "Flach oder leicht erhaben",
+      "Juckreiz oder Brennen",
+      "Harte warzenartige Oberfläche"
+    ],
+    "causes": [
+      "UV-Strahlung",
+      "Solarien",
+      "Geschwächtes Immunsystem"
+    ],
+    "lookFor": [
+      "Schuppige Textur",
+      "Rosa bis rote Farbe",
+      "Fühlt sich rau an",
+      "Flach oder leicht erhaben"
+    ]
+  },
+
+  "basalCell": {
+    "name": "Basalzellkarzinom",
+    "description": "Häufigster Hautkrebs. Wächst langsam und breitet sich selten aus.",
+    "visualLabel": "Perlige rosafarbene Erhebung",
+    "visualDesc": "Glänzender perliger Knoten",
+    "symptoms": [
+      "Perlige Beule",
+      "Narbenartige Stelle",
+      "Blutende Wunde",
+      "Rosa Wachstum"
+    ],
+    "causes": [
+      "Chronische Sonneneinstrahlung",
+      "Strahlentherapie",
+      "Helle Haut"
+    ],
+    "lookFor": [
+      "Perlige Oberfläche",
+      "Rosa oder hautfarben",
+      "Sichtbare Gefäße",
+      "Langsames Wachstum"
+    ]
+  },
+
+  "benignKeratosis": {
+    "name": "Gutartige Keratose",
+    "description": "Gutartige Hautwucherung, die häufig im Alter auftritt.",
+    "visualLabel": "Wachsartige erhabene Stelle",
+    "visualDesc": "Rau, wachsartig oder „aufgeklebt“ wirkend",
+    "symptoms": [
+      "Wachsartige Oberfläche",
+      "Aufgeklebt wirkend",
+      "Unterschiedliche Farbe",
+      "Juckreiz"
+    ],
+    "causes": [
+      "Alter",
+      "Sonne",
+      "Genetik"
+    ],
+    "lookFor": [
+      "Wachsartige Textur",
+      "Hell- bis dunkelbraun",
+      "Scharf begrenzt",
+      "Aufgeklebt wirkend"
+    ]
+  },
+
+  "dermatofibroma": {
+    "name": "Dermatofibrom",
+    "description": "Gutartige feste Hautknoten, meist an den Beinen.",
+    "visualLabel": "Kleiner fester runder Knoten",
+    "visualDesc": "Kleiner erhabener Knoten, der sich beim Drücken eindellt",
+    "symptoms": [
+      "Kleiner fester Knoten",
+      "Braun oder rot",
+      "Delle beim Drücken",
+      "Leicht erhaben"
+    ],
+    "causes": [
+      "Kleinere Hautverletzungen",
+      "Insektenstiche",
+      "Unbekannte Ursachen"
+    ],
+    "lookFor": [
+      "Feste Struktur",
+      "Rötlich-braun",
+      "Dellenzeichen",
+      "Meist an den Beinen"
+    ]
+  },
+
+  "vascularLesion": {
+    "name": "Gefäßläsion",
+    "description": "Abnormalitäten der Blutgefäße, sichtbar auf der Hautoberfläche.",
+    "visualLabel": "Rote Gefäßläsion",
+    "visualDesc": "Hellrot oder violett durch nahegelegene Blutgefäße verursacht",
+    "symptoms": [
+      "Rote oder violette Flecken",
+      "Flach oder erhaben",
+      "Kann bluten",
+      "Spinnenartige Muster"
+    ],
+    "causes": [
+      "Genetik",
+      "Sonnenschäden",
+      "Alterung"
+    ],
+    "lookFor": [
+      "Leuchtend rote Farbe",
+      "Besenreiser",
+      "Verblasst bei Druck",
+      "Unregelmäßige Form"
+    ]
+  },
+
+  "eczema": {
+    "name": "Ekzem",
+    "description": "Chronisch entzündliche Hauterkrankung mit Juckreiz und Rötung.",
+    "visualLabel": "Rote juckende Hautstellen",
+    "visualDesc": "Trockene, entzündete Haut",
+    "symptoms": [
+      "Starker Juckreiz",
+      "Rötung",
+      "Trockene Haut",
+      "Nässen oder Krusten"
+    ],
+    "causes": [
+      "Immunsystemreaktion",
+      "Genetik",
+      "Umweltfaktoren",
+      "Allergene"
+    ],
+    "lookFor": [
+      "Rote juckende Flecken",
+      "Trockene schuppige Haut",
+      "Verdickte Haut",
+      "Hautfalten betroffen"
+    ]
+  },
+
+  "psoriasis": {
+    "name": "Psoriasis",
+    "description": "Chronische Autoimmunerkrankung mit schneller Hautzellproduktion.",
+    "visualLabel": "Dick schuppige silberne Plaques",
+    "visualDesc": "Rote Hautstellen mit silbernen Schuppen",
+    "symptoms": [
+      "Rote schuppige Flecken",
+      "Trockene Haut",
+      "Juckreiz oder Brennen",
+      "Verdickte Nägel"
+    ],
+    "causes": [
+      "Autoimmunreaktion",
+      "Genetik",
+      "Stress",
+      "Infektionen"
+    ],
+    "lookFor": [
+      "Silbrige Schuppen",
+      "Rote Basis",
+      "Scharf begrenzt",
+      "Ellbogen und Knie"
+    ]
+  },
+
+  "ringworm": {
+    "name": "Ringelflechte",
+    "description": "Pilzinfektion der Haut mit ringförmigem Ausschlag.",
+    "visualLabel": "Ringförmiger roter Ausschlag",
+    "visualDesc": "Roter Ring mit hellem Zentrum",
+    "symptoms": [
+      "Ringförmiger Ausschlag",
+      "Schuppige Ränder",
+      "Juckreiz",
+      "Rötung"
+    ],
+    "causes": [
+      "Pilzinfektion",
+      "Kontakt mit Infizierten",
+      "Geteilte Gegenstände",
+      "Feuchte Umgebung"
+    ],
+    "lookFor": [
+      "Ringform",
+      "Schuppige Ränder",
+      "Helles Zentrum",
+      "Juckender roter Rand"
+    ]
+  },
+
+  "rosacea": {
+    "name": "Rosazea",
+    "description": "Chronische Gesichtsrötung mit sichtbaren Blutgefäßen.",
+    "visualLabel": "Gesichtsrötung",
+    "visualDesc": "Rötung auf Wangen und Nase",
+    "symptoms": [
+      "Gesichtsrötung",
+      "Sichtbare Gefäße",
+      "Pickelartige Läsionen",
+      "Augenreizung"
+    ],
+    "causes": [
+      "Genetik",
+      "Umweltfaktoren",
+      "Sonne",
+      "Essen/Trinken"
+    ],
+    "lookFor": [
+      "Rote Wangen",
+      "Besenreiser im Gesicht",
+      "Häufige Rötung",
+      "Nasenbereich"
+    ]
+  },
+
+  "seborrheicKeratosis": {
+    "name": "Seborrhoische Keratose",
+    "description": "Gutartige altersbedingte Hautwucherung.",
+    "visualLabel": "Wachsartige „aufgeklebt“ wirkende Stelle",
+    "visualDesc": "Rau und wachsartig auf der Haut",
+    "symptoms": [
+      "Wachsartige Oberfläche",
+      "Aufgeklebt wirkend",
+      "Farbvariationen",
+      "Juckreiz"
+    ],
+    "causes": [
+      "Alter",
+      "Sonne",
+      "Genetik"
+    ],
+    "lookFor": [
+      "Wachsartig",
+      "Braun bis dunkelbraun",
+      "Scharf begrenzt",
+      "Aufgeklebt"
+    ]
+  },
+
+  "vitiligo": {
+    "name": "Vitiligo",
+    "description": "Pigmentverlust der Haut mit weißen Flecken.",
+    "visualLabel": "Weiße Depigmentierungsflecken",
+    "visualDesc": "Klar abgegrenzte weiße Hautstellen",
+    "symptoms": [
+      "Weiße Flecken",
+      "Haaraufhellung",
+      "Pigmentverlust",
+      "Symmetrische Verteilung"
+    ],
+    "causes": [
+      "Autoimmunerkrankung",
+      "Genetik",
+      "Oxidativer Stress"
+    ],
+    "lookFor": [
+      "Milchweiße Flecken",
+      "Scharfe Grenzen",
+      "Symmetrisch",
+      "Weiße Haare im Bereich"
+    ]
+  },
+
+  "warts": {
+    "name": "Warzen",
+    "description": "Kleine raue Hautwucherungen durch HPV-Virus.",
+    "visualLabel": "Raue erhabene Knötchen",
+    "visualDesc": "Kleine unregelmäßige Hautwucherungen",
+    "symptoms": [
+      "Raue Oberfläche",
+      "Knötchen",
+      "Schwarze Punkte",
+      "Schmerz bei Druck"
+    ],
+    "causes": [
+      "HPV-Virus",
+      "Kontaktinfektion",
+      "Hautverletzungen",
+      "Schwaches Immunsystem"
+    ],
+    "lookFor": [
+      "Raue Textur",
+      "Hautfarben oder grau",
+      "Schwarze Punkte",
+      "Hände und Füße"
+    ]
+  }
+},
+
   "precautions": {
-    "title": "Precautions & Skin Care",
-    "subtitle": "Follow these guidelines to maintain healthy skin and prevent skin diseases.",
-    "warningTitle": "Important Warning",
-    "warningBody": "If you notice any rapidly changing skin lesion, immediately consult a certified dermatologist. Early detection saves lives.",
+    "title": "Vorsichtsmaßnahmen & Hautpflege",
+    "subtitle": "Richtlinien für gesunde Haut.",
+    "warningTitle": "Wichtiger Hinweis",
+    "warningBody": "Bei schnellen Hautveränderungen sofort zum Arzt.",
     "sun": {
-      "title": "Sun Protection",
-      "tips": ["Apply SPF 30+ sunscreen daily", "Reapply every 2 hours outdoors", "Wear protective clothing and hats", "Avoid peak sun hours (10am–4pm)"]
+      "title": "Sonnenschutz",
+      "tips": ["SPF 30+", "Alle 2 Stunden neu auftragen", "Schutzkleidung", "10–16 Uhr vermeiden"]
     },
     "checks": {
-      "title": "Regular Skin Checks",
-      "tips": ["Check your skin monthly", "Look for new or changing moles", "Use the ABCDE rule for moles", "See a dermatologist annually"]
+      "title": "Hautkontrolle",
+      "tips": ["Monatlich prüfen", "Neue Muttermale beobachten", "ABCDE-Regel", "Jährlicher Arztbesuch"]
     },
     "hydration": {
-      "title": "Skin Hydration",
-      "tips": ["Moisturize daily after bathing", "Drink at least 8 glasses of water", "Avoid hot showers — use warm water", "Use fragrance-free products"]
+      "title": "Hydration",
+      "tips": ["Eincremen", "Viel Wasser trinken", "Keine heißen Duschen", "Duftfrei"]
     },
     "diet": {
-      "title": "Healthy Diet",
-      "tips": ["Eat antioxidant-rich foods", "Include omega-3 fatty acids", "Reduce processed sugar intake", "Eat leafy greens and berries"]
+      "title": "Ernährung",
+      "tips": ["Antioxidantien", "Omega-3", "Weniger Zucker", "Obst & Gemüse"]
     },
     "habits": {
-      "title": "Avoid Harmful Habits",
-      "tips": ["Avoid smoking — damages skin", "Limit alcohol consumption", "Do not use tanning beds", "Avoid picking or scratching skin"]
+      "title": "Schlechte Gewohnheiten vermeiden",
+      "tips": ["Nicht rauchen", "Wenig Alkohol", "Kein Solarium", "Nicht kratzen"]
     },
     "doctor": {
-      "title": "When to See a Doctor",
-      "tips": ["Mole changes in size or color", "Sore that won't heal", "Itching or bleeding lesions", "Any skin change that worries you"]
+      "title": "Wann zum Arzt",
+      "tips": ["Größenänderung", "Nicht heilende Wunden", "Blutung", "Verdächtige Veränderungen"]
     }
   },
+
   "profile": {
-    "title": "My Profile",
-    "displayName": "Display Name",
-    "email": "Email Address",
-    "saving": "Saving...",
-    "save": "Save Changes",
-    "updateSuccess": "Profile updated successfully!",
-    "updateError": "Failed to update profile.",
-    "historyTitle": "Prediction History",
-    "historyNote": "Full history will be available once backend is connected"
+    "title": "Mein Profil",
+    "displayName": "Anzeigename",
+    "email": "E-Mail-Adresse",
+    "saving": "Speichern...",
+    "save": "Änderungen speichern",
+    "updateSuccess": "Profil erfolgreich aktualisiert!",
+    "updateError": "Fehler beim Aktualisieren.",
+    "historyTitle": "Vorhersageverlauf",
+    "historyNote": "Verlauf verfügbar, sobald Backend verbunden ist"
   }
 }

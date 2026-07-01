@@ -5,7 +5,7 @@ import { updateProfile } from 'firebase/auth';
 import { query, collection, where, orderBy, getDocs } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 import { DISEASE_API_KEYS, SEVERITY_KEYS } from '../../i18n/diseaseKeys';
-import { User, Save, History, Loader2, X, ChevronRight, Calendar, Activity } from 'lucide-react';
+import { User, Save, History, Loader2, X, ChevronRight, Calendar, Activity, CheckCircle2, AlertTriangle, AlertOctagon, BarChart3, Camera, Upload, Microscope } from 'lucide-react';
 
 const severityColor = {
   Low: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800',
@@ -17,6 +17,18 @@ const severityBadge = {
   Low: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400',
   Medium: 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400',
   High: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+};
+
+const severityIcon = {
+  Low: CheckCircle2,
+  Medium: AlertTriangle,
+  High: AlertOctagon,
+};
+
+const severityGradient = {
+  Low: 'from-green-400 to-emerald-500',
+  Medium: 'from-amber-400 to-orange-500',
+  High: 'from-rose-400 to-red-500',
 };
 
 const Profile = () => {
@@ -82,15 +94,22 @@ const Profile = () => {
     <div className="space-y-4">
 
       {/* Profile Card */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-        <h2 className="text-lg font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-          <User className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          <span>{t('dashboard.profile.title')}</span>
-        </h2>
+      <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-500" />
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 text-white flex items-center justify-center shadow-md shrink-0">
+            <User className="w-5 h-5" />
+          </div>
+          <h2 className="text-lg font-bold text-slate-800 dark:text-white">
+            {t('dashboard.profile.title')}
+          </h2>
+        </div>
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <div className="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-4xl font-bold text-blue-600 dark:text-blue-300 shrink-0">
-            {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'}
+          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 p-[3px] shadow-md shrink-0">
+            <div className="w-full h-full rounded-full bg-blue-50 dark:bg-slate-800 flex items-center justify-center text-4xl font-bold text-blue-600 dark:text-blue-300">
+              {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'}
+            </div>
           </div>
 
           <div className="flex-1 w-full space-y-4">
@@ -130,16 +149,21 @@ const Profile = () => {
       </div>
 
       {/* History Card */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700">
-        <h2 className="text-lg font-bold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
-          <History className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          <span>{t('dashboard.profile.historyTitle')}</span>
+      <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-purple-400 to-violet-500" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 text-white flex items-center justify-center shadow-md shrink-0">
+            <History className="w-5 h-5" />
+          </div>
+          <h2 className="text-lg font-bold text-slate-800 dark:text-white flex-1">
+            {t('dashboard.profile.historyTitle')}
+          </h2>
           {history.length > 0 && (
-            <span className="ml-auto text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-lg">
+            <span className="text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 px-2.5 py-1 rounded-lg">
               {history.length} scans
             </span>
           )}
-        </h2>
+        </div>
 
         {loadingHistory ? (
           <div className="flex justify-center py-8">
@@ -147,19 +171,26 @@ const Profile = () => {
           </div>
         ) : history.length === 0 ? (
           <div className="text-center py-8">
-            <div className="text-4xl mb-3">🔬</div>
+            <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mx-auto mb-3">
+              <Microscope className="w-7 h-7 text-blue-400" />
+            </div>
             <p className="text-slate-400 text-sm">
               {t('dashboard.profile.noHistory', 'No scan history found. Run your first skin analysis on the Scan & Predict tab!')}
             </p>
           </div>
         ) : (
           <div className="space-y-3">
-            {history.map((item) => (
+            {history.map((item) => {
+              const SeverityIcon = severityIcon[item.severity] || Activity;
+              return (
               <div
                 key={item.id}
                 onClick={() => setSelectedPrediction(item)}
-                className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-600 transition-all group"
+                className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-600 hover:shadow-md transition-all group"
               >
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${severityGradient[item.severity]} flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 transition-transform duration-300`}>
+                  <SeverityIcon className="w-5 h-5 text-white" />
+                </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="font-semibold text-slate-800 dark:text-white text-sm">
@@ -186,7 +217,8 @@ const Profile = () => {
                   <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
@@ -248,10 +280,11 @@ const Profile = () => {
                   <Activity className="w-4 h-4" />
                   <div className="text-xs font-semibold opacity-70">Severity Level</div>
                 </div>
-                <div className="text-base font-bold mt-1">
-                  {selectedPrediction.severity === 'Low' && '✅ '}
-                  {selectedPrediction.severity === 'Medium' && '⚠️ '}
-                  {selectedPrediction.severity === 'High' && '🚨 '}
+                <div className="flex items-center gap-1.5 text-base font-bold mt-1">
+                  {(() => {
+                    const ModalSeverityIcon = severityIcon[selectedPrediction.severity] || Activity;
+                    return <ModalSeverityIcon className="w-4 h-4" />;
+                  })()}
                   {selectedPrediction.severity} Risk
                 </div>
               </div>
@@ -260,7 +293,8 @@ const Profile = () => {
               {selectedPrediction.probabilities.length > 0 && (
                 <div className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-4">
                   <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-1.5">
-                    📊 Prediction Probabilities
+                    <BarChart3 className="w-3.5 h-3.5 text-blue-500" />
+                    Prediction Probabilities
                   </h4>
                   <div className="space-y-2.5">
                     {selectedPrediction.probabilities.map((item, index) => (
@@ -284,8 +318,12 @@ const Profile = () => {
               {/* Source info */}
               <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
                 <span>Source:</span>
-                <span className="font-semibold text-slate-600 dark:text-slate-300 capitalize">
-                  {selectedPrediction.source === 'webcam' ? '📷 Webcam' : '📤 Upload'}
+                <span className="inline-flex items-center gap-1 font-semibold text-slate-600 dark:text-slate-300 capitalize">
+                  {selectedPrediction.source === 'webcam' ? (
+                    <><Camera className="w-3.5 h-3.5" /> Webcam</>
+                  ) : (
+                    <><Upload className="w-3.5 h-3.5" /> Upload</>
+                  )}
                 </span>
                 {selectedPrediction.isConsensus && (
                   <span className="font-semibold text-indigo-600 dark:text-indigo-400">· Multi-image consensus</span>
