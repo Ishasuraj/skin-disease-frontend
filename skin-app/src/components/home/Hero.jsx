@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Bot, Rocket, Camera, Microscope, CheckCircle2, Zap, Lock } from 'lucide-react';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -10,8 +11,8 @@ const Hero = () => {
       <div className="max-w-6xl mx-auto px-4 py-20 flex flex-col md:flex-row items-center gap-12">
 
         <div className="flex-1 text-center md:text-left">
-          <div className="inline-block bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full mb-4">
-            🤖 {t('hero.badge')}
+          <div className="inline-flex items-center gap-1.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+            <Bot className="w-3.5 h-3.5" /> {t('hero.badge')}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white leading-tight mb-4">
             {t('hero.titleLine1')} <br />
@@ -25,15 +26,17 @@ const Hero = () => {
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
             <button
               onClick={() => navigate('/login')}
-              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-200 dark:shadow-blue-900"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg shadow-blue-200 dark:shadow-blue-900"
             >
-              🚀 {t('hero.getStarted')}
+              <Rocket className="w-4 h-4" />
+              <span>{t('hero.getStarted')}</span>
             </button>
             <button
               onClick={() => navigate('/login')}
-              className="bg-cyan-500 hover:bg-cyan-600 dark:bg-cyan-600 dark:hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all"
+              className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 dark:bg-cyan-600 dark:hover:bg-cyan-700 text-white font-semibold px-6 py-3 rounded-xl transition-all"
             >
-              📷 {t('hero.scanNow')}
+              <Camera className="w-4 h-4" />
+              <span>{t('hero.scanNow')}</span>
             </button>
           </div>
 
@@ -59,18 +62,20 @@ const Hero = () => {
             <div className="absolute inset-6 rounded-full bg-gradient-to-br from-blue-300 to-cyan-300 dark:from-blue-800 dark:to-cyan-800 opacity-40"></div>
             <div className="absolute inset-12 rounded-full bg-white dark:bg-slate-700 shadow-xl flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl mb-2">🔬</div>
+                <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto mb-2">
+                  <Microscope className="w-7 h-7" />
+                </div>
                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-300">{t('hero.aiAnalysis')}</div>
               </div>
             </div>
-            <div className="absolute top-4 right-0 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-green-600 dark:text-green-400">
-              ✅ {t('hero.badgeAccurate')}
+            <div className="absolute top-4 right-0 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-green-600 dark:text-green-400 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5" /> {t('hero.badgeAccurate')}
             </div>
-            <div className="absolute bottom-8 left-0 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-blue-600 dark:text-blue-400">
-              ⚡ {t('hero.badgeResults')}
+            <div className="absolute bottom-8 left-0 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-blue-600 dark:text-blue-400 flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5" /> {t('hero.badgeResults')}
             </div>
-            <div className="absolute bottom-0 right-8 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-purple-600 dark:text-purple-400">
-              🔒 {t('hero.badgeSecure')}
+            <div className="absolute bottom-0 right-8 bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-slate-900 px-3 py-2 text-xs font-medium text-purple-600 dark:text-purple-400 flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5" /> {t('hero.badgeSecure')}
             </div>
           </div>
         </div>
