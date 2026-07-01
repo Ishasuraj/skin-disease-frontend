@@ -26,10 +26,10 @@ const severityDotColor = {
   high: 'text-red-500 fill-red-500',
 };
 
-const severityGradient = {
-  low: 'from-green-400 to-emerald-500',
-  medium: 'from-amber-400 to-orange-500',
-  high: 'from-rose-400 to-red-500',
+const severityBorder = {
+  low: 'border-green-300 dark:border-green-700',
+  medium: 'border-amber-300 dark:border-amber-700',
+  high: 'border-red-300 dark:border-red-700',
 };
 
 const severityRing = {
@@ -51,9 +51,9 @@ const DiseaseInfo = () => {
     <div className="space-y-4">
 
       <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-500" />
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-500" />
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 text-white flex items-center justify-center shadow-md shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
             <BookOpen className="w-6 h-6" />
           </div>
           <div>
@@ -88,8 +88,8 @@ const DiseaseInfo = () => {
               <div className="p-5">
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
-                    <div className={`w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-gradient-to-br ${severityGradient[disease.severity]} p-[2px] shadow-md group-hover:scale-105 transition-transform duration-300`}>
-                      <div className="w-full h-full rounded-[10px] overflow-hidden bg-slate-100 dark:bg-slate-700">
+                    <div className={`w-16 h-16 rounded-xl overflow-hidden shrink-0 border-2 ${severityBorder[disease.severity]} shadow-sm group-hover:scale-105 transition-transform duration-300`}>
+                      <div className="w-full h-full overflow-hidden bg-slate-100 dark:bg-slate-700">
                         <img
                           src={disease.image}
                           alt={name}
@@ -232,7 +232,7 @@ const DiseaseInfo = () => {
       </div>
 
     </div>
-  );
+  );  
 };
 
 export default DiseaseInfo;

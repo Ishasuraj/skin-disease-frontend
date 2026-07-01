@@ -71,7 +71,7 @@ const getDiseaseInfo = (diseaseName) => {
   };
 };
 
-const PredictionResult = ({ data, image, isConsensus = false }) => {
+const PredictionResult = ({ data, image, images, isConsensus = false }) => {
   const { t } = useTranslation();
   const [downloading, setDownloading] = useState(false);
 
@@ -191,29 +191,77 @@ const PredictionResult = ({ data, image, isConsensus = false }) => {
       pdf.text(isConsensus ? 'Multi-Image Consensus' : 'Single Image Scan', margin + contentW * 0.72, y + 13);
       y += 24;
 
-      // ── SCANNED IMAGE ────────────────────────────────────────────────────────
-      if (image) {
-        sectionTitle('Scanned Image');
-        try {
-          const imgMaxW = contentW * 0.48;
-          const imgMaxH = 58;
-          const imgX = margin + (contentW - imgMaxW) / 2;
-          drawRect(imgX - 2, y - 1, imgMaxW + 4, imgMaxH + 4, 4, [248, 250, 252], [226, 232, 240]);
-          const imgObj = new window.Image();
-          imgObj.crossOrigin = 'anonymous';
-          await new Promise((resolve, reject) => { imgObj.onload = resolve; imgObj.onerror = reject; imgObj.src = image; });
-          const iRatio = imgObj.naturalWidth / imgObj.naturalHeight;
-          let iW = imgMaxW; let iH = iW / iRatio;
-          if (iH > imgMaxH) { iH = imgMaxH; iW = iH * iRatio; }
-          const canvas = document.createElement('canvas');
-          canvas.width = imgObj.naturalWidth; canvas.height = imgObj.naturalHeight;
-          canvas.getContext('2d').drawImage(imgObj, 0, 0);
-          pdf.addImage(canvas.toDataURL('image/jpeg', 0.85), 'JPEG', imgX + (imgMaxW - iW) / 2, y + (imgMaxH - iH) / 2, iW, iH);
-          y += imgMaxH + 8;
-        } catch {
-          pdf.setFontSize(8); pdf.setTextColor(100, 116, 139);
-          pdf.text('[Image not available]', pageW / 2, y + 20, { align: 'center' });
-          y += 30;
+      // ── SCANNED IMAGE(S) ─────────────────────────────────────────────────────
+      // For consensus reports, `images` holds every analyzed spot image and all
+      // of them are drawn in a grid. For single-image reports, fall back to the
+      // single `image` prop.
+      const allImages = (images && images.length > 0) ? images : (image ? [image] : []);
+
+      if (allImages.length > 0) {
+        sectionTitle(allImages.length > 1 ? `Scanned Images (${allImages.length})` : 'Scanned Image');
+
+        if (allImages.length === 1) {
+          try {
+            const imgMaxW = contentW * 0.48;
+            const imgMaxH = 58;
+            const imgX = margin + (contentW - imgMaxW) / 2;
+            drawRect(imgX - 2, y - 1, imgMaxW + 4, imgMaxH + 4, 4, [248, 250, 252], [226, 232, 240]);
+            const imgObj = new window.Image();
+            imgObj.crossOrigin = 'anonymous';
+            await new Promise((resolve, reject) => { imgObj.onload = resolve; imgObj.onerror = reject; imgObj.src = allImages[0]; });
+            const iRatio = imgObj.naturalWidth / imgObj.naturalHeight;
+            let iW = imgMaxW; let iH = iW / iRatio;
+            if (iH > imgMaxH) { iH = imgMaxH; iW = iH * iRatio; }
+            const canvas = document.createElement('canvas');
+            canvas.width = imgObj.naturalWidth; canvas.height = imgObj.naturalHeight;
+            canvas.getContext('2d').drawImage(imgObj, 0, 0);
+            pdf.addImage(canvas.toDataURL('image/jpeg', 0.85), 'JPEG', imgX + (imgMaxW - iW) / 2, y + (imgMaxH - iH) / 2, iW, iH);
+            y += imgMaxH + 8;
+          } catch {
+            pdf.setFontSize(8); pdf.setTextColor(100, 116, 139);
+            pdf.text('[Image not available]', pageW / 2, y + 20, { align: 'center' });
+            y += 30;
+          }
+        } else {
+          // Grid layout: up to 3 columns, wrapping to additional rows/pages as needed.
+          const cols = Math.min(3, allImages.length);
+          const gap = 4;
+          const cellW = (contentW - gap * (cols - 1)) / cols;
+          const cellH = 42;
+
+          for (let i = 0; i < allImages.length; i++) {
+            const col = i % cols;
+            if (col === 0) addPageIfNeeded(cellH + 6);
+            const cellX = margin + col * (cellW + gap);
+
+            drawRect(cellX - 1, y - 1, cellW + 2, cellH + 2, 3, [248, 250, 252], [226, 232, 240]);
+            try {
+              const imgObj = new window.Image();
+              imgObj.crossOrigin = 'anonymous';
+              await new Promise((resolve, reject) => { imgObj.onload = resolve; imgObj.onerror = reject; imgObj.src = allImages[i]; });
+              const iRatio = imgObj.naturalWidth / imgObj.naturalHeight;
+              let iW = cellW - 4; let iH = iW / iRatio;
+              if (iH > cellH - 4) { iH = cellH - 4; iW = iH * iRatio; }
+              const canvas = document.createElement('canvas');
+              canvas.width = imgObj.naturalWidth; canvas.height = imgObj.naturalHeight;
+              canvas.getContext('2d').drawImage(imgObj, 0, 0);
+              pdf.addImage(
+                canvas.toDataURL('image/jpeg', 0.85), 'JPEG',
+                cellX + (cellW - iW) / 2, y + (cellH - iH) / 2, iW, iH
+              );
+            } catch {
+              pdf.setFontSize(7); pdf.setTextColor(100, 116, 139);
+              pdf.text('[Image not available]', cellX + cellW / 2, y + cellH / 2, { align: 'center' });
+            }
+
+            pdf.setFontSize(6.5); pdf.setFont('helvetica', 'normal'); pdf.setTextColor(100, 116, 139);
+            pdf.text(`Spot ${i + 1}`, cellX + cellW / 2, y + cellH + 4, { align: 'center' });
+
+            if (col === cols - 1 || i === allImages.length - 1) {
+              y += cellH + 8;
+            }
+          }
+          y += 2;
         }
       }
 

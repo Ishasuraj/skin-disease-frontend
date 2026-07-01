@@ -25,10 +25,10 @@ const severityIcon = {
   High: AlertOctagon,
 };
 
-const severityGradient = {
-  Low: 'from-green-400 to-emerald-500',
-  Medium: 'from-amber-400 to-orange-500',
-  High: 'from-rose-400 to-red-500',
+const severityChip = {
+  Low: 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400',
+  Medium: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400',
+  High: 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400',
 };
 
 const Profile = () => {
@@ -95,9 +95,9 @@ const Profile = () => {
 
       {/* Profile Card */}
       <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-400 to-indigo-500" />
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-blue-500" />
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 text-white flex items-center justify-center shadow-md shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
             <User className="w-5 h-5" />
           </div>
           <h2 className="text-lg font-bold text-slate-800 dark:text-white">
@@ -106,7 +106,7 @@ const Profile = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 p-[3px] shadow-md shrink-0">
+          <div className="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900/30 p-[3px] shadow-sm shrink-0">
             <div className="w-full h-full rounded-full bg-blue-50 dark:bg-slate-800 flex items-center justify-center text-4xl font-bold text-blue-600 dark:text-blue-300">
               {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'}
             </div>
@@ -150,9 +150,9 @@ const Profile = () => {
 
       {/* History Card */}
       <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-purple-400 to-violet-500" />
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-purple-500" />
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 text-white flex items-center justify-center shadow-md shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
             <History className="w-5 h-5" />
           </div>
           <h2 className="text-lg font-bold text-slate-800 dark:text-white flex-1">
@@ -188,8 +188,8 @@ const Profile = () => {
                 onClick={() => setSelectedPrediction(item)}
                 className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-700 rounded-xl cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-600 hover:shadow-md transition-all group"
               >
-                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${severityGradient[item.severity]} flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 transition-transform duration-300`}>
-                  <SeverityIcon className="w-5 h-5 text-white" />
+                <div className={`w-10 h-10 rounded-xl ${severityChip[item.severity]} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300`}>
+                  <SeverityIcon className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">

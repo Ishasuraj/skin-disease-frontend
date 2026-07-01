@@ -277,6 +277,12 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
     return images.find(img => img.status === 'success')?.preview || null;
   }, [images, consensusResult]);
 
+  // All successfully analyzed spot images — used so the consensus report
+  // includes every image, not just one representative one.
+  const consensusImages = useMemo(() => {
+    return images.filter(img => img.status === 'success' && img.result).map(img => img.preview);
+  }, [images]);
+
   const analyzedImagesCount = useMemo(() => images.filter(img => img.status === 'success').length, [images]);
   const readyImagesCount = useMemo(() => images.filter(img => img.status === 'ready' || img.status === 'error').length, [images]);
   const isAnalyzingAny = useMemo(() => images.some(img => img.status === 'analyzing'), [images]);
@@ -611,7 +617,7 @@ const ImageUpload = ({ images, setImages, selectedImageId, setSelectedImageId })
                       </p>
                     </div>
                   </div>
-                  <PredictionResult data={consensusResult} image={representativeImage} isConsensus={true} />
+                  <PredictionResult data={consensusResult} image={representativeImage} images={consensusImages} isConsensus={true} />
                 </div>
               )}
 
