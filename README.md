@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# DERMALENS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Skin diseases are among the most common health conditions worldwide, but access to timely dermatological care is often limited. To address this, **DermaLens** is an AI-powered web platform that enables users to upload a skin image and receive an instant preliminary classification across ten common skin conditions, along with guidance on the next steps.
 
-## Available Scripts
+The platform integrates an EfficientNetB0-based deep learning model with a React frontend, Flask backend, and Firebase for authentication and data storage. It also provides multilingual support, a rule-based chatbot, nearby dermatologist search, PDF report generation, and an admin dashboard.
 
-In the project directory, you can run:
+This document presents the project's architecture, implementation, model evaluation, deployment, and key outcomes.
 
-### `npm start`
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d0138050-f28e-4da3-9804-ec99ccd4bbf8" width="100%">
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Vision
 
-### `npm test`
+> To make preliminary, AI-assisted skin health screening accessible, fast, and easy to understand for everyone—regardless of location, language, or immediate access to a dermatologist—while always directing users toward qualified medical care.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+# End-to-End User Flow
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. User registers or logs in using Firebase Authentication (Google OAuth or Email/Password).
+2. User uploads or captures a skin image.
+3. The frontend validates the image and sends it to the Flask backend.
+4. The backend preprocesses the image and performs inference using the EfficientNetB0 model.
+5. A Grad-CAM heatmap is generated for visual explanation.
+6. The backend returns the predicted disease, confidence score, severity, probabilities, and heatmap.
+7. The frontend displays the prediction, disease information, and precautions.
+8. The prediction is stored in Firestore.
+9. Users can optionally:
+   - Chat with the assistant
+   - Find nearby dermatologists
+   - Download a PDF report
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Multi-Image Consensus
 
-### `npm run eject`
+For improved reliability, users can upload multiple images of the same skin condition. Each image is analysed independently, and the frontend combines the predictions into a consensus result, increasing confidence when multiple images agree.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/aeea94d4-e29c-4d79-b91f-1373afe17ba4" width="100%">
+</p>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/0ce7bdde-d571-4766-8b3b-ab53bab09228" width="48%">
+  <img src="https://github.com/user-attachments/assets/e4fde63a-8b10-41a8-900b-902283434623" width="48%">
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Find Dermatologist Module
 
-## Learn More
+- Developed a feature to help users locate nearby dermatology clinics.
+- Integrated browser geolocation for location-based search.
+- Used OpenStreetMap to display nearby dermatologists.
+- Designed a responsive interface for displaying hospital information.
+- Added one-click **Directions** support that redirects users to Google Maps for navigation.
+- Improved accessibility and overall user experience.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c15db33f-3d42-4ba2-bd8a-65aac3298610" width="100%">
+</p>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Frontend — Render
 
-### Analyzing the Bundle Size
+The React frontend is deployed as a static web service on **Render**. Render automatically builds the application from the GitHub repository and serves the optimized production build over HTTPS, ensuring fast and reliable access.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Backend — Hugging Face Spaces
 
-### Making a Progressive Web App
+The Flask-based machine learning API is deployed on **Hugging Face Spaces** using Docker. The application is built on a `python:3.10-slim` image, installs all dependencies from `requirements.txt`, and runs using Gunicorn on port **7860**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+gunicorn app:app --bind 0.0.0.0:7860 --timeout 120 --workers 1
+```
 
-### Advanced Configuration
+This deployment setup provides a consistent environment between local development and production while serving real-time AI predictions.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Firebase
 
-### Deployment
+**Firebase Authentication** and **Cloud Firestore** are integrated directly with the frontend. Firebase handles user authentication (Email/Password and Google Sign-In) and securely stores user profiles and prediction history, eliminating the need for separate backend deployment for these services.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-Configuration
+•	CORS is enabled on the Flask API (flask-cors) so the Render-hosted frontend can call the Hugging-Face-hosted backend across origins.
+•	API keys and other secrets are kept in environment variables rather than committed to source control.
+•	The backend listens on 0.0.0.0 with the port configurable via the PORT environment variable, so the same image runs unmodified locally, in Docker, and on Hugging Face.
