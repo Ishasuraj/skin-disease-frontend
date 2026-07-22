@@ -1,28 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { useState, useEffect } from 'react';
-import { auth } from './firebase/firebase';
 import i18n from './i18n';
-import { onAuthStateChanged } from 'firebase/auth';
 import { Activity, ShieldBan } from 'lucide-react';
-import { isAdmin } from './firebase/admins';
+import { useAuth } from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import ChatBot from './components/chatbot/ChatBot';
 function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, []);
+  const { user, isAdmin, loading } = useAuth();
 
   if (loading) {
     return (
@@ -59,13 +47,13 @@ function App() {
           element={user ? <Dashboard /> : <Navigate to="/login" />}
         />
 
-        {/* Admin dashboard — only admin emails */}
+        {/* Admin dashboard — server-verified custom claim */}
         <Route
           path="/admin"
           element={
             !user
               ? <Navigate to="/login" />
-              : isAdmin(user.email)
+              : isAdmin
               ? <AdminDashboard />
               : <Navigate to="/unauthorized" />
           }

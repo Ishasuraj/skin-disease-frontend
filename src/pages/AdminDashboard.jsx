@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { auth } from '../firebase/firebase';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { isAdmin } from '../firebase/admins';
+import { useAuth } from '../context/AuthContext';
 import StatsCards from '../components/admin/StatsCards';
 import PredictionsChart from '../components/admin/PredictionsChart';
 import UsersTable from '../components/admin/UsersTable';
@@ -20,10 +20,10 @@ const AdminDashboard = () => {
     document.documentElement.classList.contains('dark')
   );
   const navigate = useNavigate();
-  const user = auth.currentUser;
+  const { user, isAdmin } = useAuth();
 
-  // ✅ Extra safety — redirect if non-admin somehow gets here
-  if (!user || !isAdmin(user.email)) {
+  // Extra safety — redirect if non-admin somehow gets here
+  if (!user || !isAdmin) {
     navigate('/unauthorized');
     return null;
   }

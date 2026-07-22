@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { auth } from '../firebase/firebase';
-import { signOut } from 'firebase/auth';
+import { signOut, sendEmailVerification } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ImageUpload from '../components/dashboard/ImageUpload';
@@ -9,7 +9,7 @@ import Precautions from '../components/dashboard/Precautions';
 import Profile from '../components/dashboard/Profile';
 import AppointmentBooking from '../components/dashboard/AppointmentBooking';
 import LanguageSelector from '../components/layout/LanguageSelector';
-import { isAdmin } from '../firebase/admins';
+import { useAuth } from '../context/AuthContext';
 import {
   Stethoscope,
   ScanLine,
@@ -38,7 +38,26 @@ const Dashboard = () => {
     document.documentElement.classList.contains('dark')
   );
   const navigate = useNavigate();
-  const user = auth.currentUser;
+  const { user, isAdmin, isAdminPendingVerification, refreshAdminStatus } = useAuth();
+
+  const [sendingVerification, setSendingVerification] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
+  const [verificationError, setVerificationError] = useState('');
+
+  const handleSendVerification = async () => {
+    setSendingVerification(true);
+    setVerificationError('');
+    try {
+      if (auth.currentUser) {
+        await sendEmailVerification(auth.currentUser);
+        setVerificationSent(true);
+      }
+    } catch (err) {
+      setVerificationError(err.message);
+    } finally {
+      setSendingVerification(false);
+    }
+  };
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -50,7 +69,7 @@ const Dashboard = () => {
     { id: 'disease', icon: FileText, labelKey: 'dashboard.nav.disease' },
     { id: 'precautions', icon: AlertTriangle, labelKey: 'dashboard.nav.precautions' },
     { id: 'profile', icon: User, labelKey: 'dashboard.nav.profile' },
-    ...(isAdmin(user?.email)
+    ...(isAdmin
       ? [{ id: 'admin', icon: Shield, labelKey: 'dashboard.nav.admin' }]
       : []),
     { id: 'appointment', icon: MapPin, labelKey: 'dashboard.nav.appointment' },
@@ -97,7 +116,7 @@ const Dashboard = () => {
                 {user?.displayName || t('dashboard.user')}
               </div>
               <div className="text-xs text-slate-400 truncate">{user?.email}</div>
-              {isAdmin(user?.email) && (
+              {isAdmin && (
                 <span className="inline-flex items-center gap-1 text-xs bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-2 py-0.5 rounded-lg font-semibold mt-1">
                   <Shield className="w-3 h-3" /> {t('dashboard.adminBadge')}
                 </span>
@@ -199,6 +218,48 @@ const Dashboard = () => {
         </header>
 
         <main className="flex-1 p-4 md:p-6 overflow-auto">
+          {isAdminPendingVerification && (
+            <div className="mb-6 p-5 bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/30 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex gap-3">
+                <AlertTriangle className="w-6 h-6 text-amber-600 dark:text-amber-400 shrink-0" />
+                <div>
+                  <h3 className="text-sm font-bold text-amber-800 dark:text-amber-300">
+                    Administrator Verification Required
+                  </h3>
+                  <p className="text-xs text-amber-700 dark:text-amber-400/95 mt-0.5">
+                    Your account email ({user?.email}) is registered as an administrator, but has not been verified. Please verify your email to unlock administrator features.
+                  </p>
+                  {verificationError && (
+                    <p className="text-xs text-red-600 dark:text-red-400 mt-1 font-medium">
+                      Error: {verificationError}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-3 self-end md:self-center shrink-0">
+                {verificationSent ? (
+                  <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 px-3 py-1.5 rounded-xl">
+                    Verification link sent!
+                  </span>
+                ) : (
+                  <button
+                    onClick={handleSendVerification}
+                    disabled={sendingVerification}
+                    className="text-xs font-semibold bg-amber-600 hover:bg-amber-700 disabled:opacity-50 text-white px-4 py-2 rounded-xl transition-all"
+                  >
+                    {sendingVerification ? 'Sending...' : 'Send Verification Email'}
+                  </button>
+                )}
+                <button
+                  onClick={refreshAdminStatus}
+                  className="text-xs font-semibold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 px-4 py-2 rounded-xl transition-all"
+                >
+                  Refresh Status
+                </button>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'scan' && (
             <ImageUpload
               images={images}
